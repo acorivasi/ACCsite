@@ -50,26 +50,15 @@ function initReveal() {
 
 /* ---------- Hero puzzle mosaic ---------- */
 function initHeroPuzzle() {
+  // videos autoplay natively (muted loop playsinline autoplay); no extra
+  // JS needed. An earlier version paused pieces via IntersectionObserver
+  // while the section was still below the fold, which raced with the
+  // native autoplay and left most pieces stuck paused — removed.
   const root = document.querySelector("[data-puzzle]");
   if (!root) return;
-
-  const pieces = Array.from(root.querySelectorAll(".puzzle-piece"));
-  if (!pieces.length) return;
-
-  // play/pause each piece's video based on viewport visibility, to save
-  // resources when the hero scrolls out of view (mobile data / CPU)
-  const io = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        const video = entry.target.querySelector("video");
-        if (!video) return;
-        if (entry.isIntersecting) video.play().catch(() => {});
-        else video.pause();
-      });
-    },
-    { threshold: 0.2 }
-  );
-  pieces.forEach((piece) => io.observe(piece));
+  root.querySelectorAll(".puzzle-piece video").forEach((video) => {
+    video.play().catch(() => {});
+  });
 }
 
 /* ---------- Puzzle caption text-shatter ----------
