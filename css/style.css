@@ -348,8 +348,10 @@ section { padding: 96px 0; }
   overflow: hidden;
   background: var(--color-text);
   filter: brightness(1) saturate(1);
+  cursor: pointer;
   transition: filter var(--transition), z-index var(--transition);
 }
+.puzzle-piece:focus-visible { outline: 3px solid var(--color-accent); outline-offset: -3px; }
 .puzzle-piece:hover {
   filter: brightness(1.08) saturate(1.12);
   z-index: 5;
@@ -411,9 +413,45 @@ section { padding: 96px 0; }
 }
 .puzzle-caption.is-shattering .puzzle-tag { opacity: 0; }
 @media (max-width: 640px) {
-  .puzzle-caption .puzzle-tag { display: none; }
-  .puzzle-caption h3 { font-size: 0.68rem; }
+  /* on small screens the on-piece text gets cramped and hard to read —
+     hide it and rely on the tap-hint below to open the bigger modal instead */
+  .hero-puzzle .puzzle-caption { display: none; }
 }
+
+/* small "+" badge hinting a piece can be tapped for a bigger view;
+   always present for touch devices, shown on hover for pointer devices */
+.tap-hint {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--color-primary-dark);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: 700;
+  line-height: 1;
+  z-index: 3;
+  box-shadow: 0 2px 8px rgba(17, 50, 48, 0.25);
+}
+@media (hover: hover) {
+  .puzzle-piece:hover .tap-hint { display: flex; }
+}
+@media (max-width: 640px) {
+  .tap-hint { display: flex; width: 30px; height: 30px; font-size: 1.3rem; }
+}
+/* positioned in each piece's own safe zone (same row band as its caption,
+   opposite side) so it's never cut off by a tab/notch in the jigsaw shape */
+.jp-1 .tap-hint { top: 8%; right: 69%; bottom: auto; left: auto; }
+.jp-2 .tap-hint { top: 6%; right: 36%; bottom: auto; left: auto; }
+.jp-3 .tap-hint { top: 8%; left: 70%; bottom: auto; right: auto; }
+.jp-4 .tap-hint { bottom: 5%; right: 69%; top: auto; left: auto; }
+.jp-5 .tap-hint { bottom: 4%; right: 36%; top: auto; left: auto; }
+.jp-6 .tap-hint { bottom: 5%; left: 70%; top: auto; right: auto; }
 
 /* text-shatter effect: each character becomes a "shard" that flies apart
    and fades, then reassembles smoothly on hover (ties back to the puzzle idea) */
@@ -436,6 +474,79 @@ section { padding: 96px 0; }
 .puzzle-caption p {
   display: none;
 }
+
+/* ---------- Puzzle piece modal (tap a piece for a bigger view) ---------- */
+.puzzle-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.puzzle-modal[hidden] { display: none; }
+.puzzle-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(17, 50, 48, 0.72);
+  backdrop-filter: blur(4px);
+}
+.puzzle-modal-card {
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-hover);
+  animation: puzzle-modal-in 0.25s ease;
+}
+@keyframes puzzle-modal-in {
+  from { opacity: 0; transform: translateY(12px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.puzzle-modal-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 2;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--color-text);
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition), transform var(--transition);
+}
+.puzzle-modal-close:hover { background: var(--color-white); transform: scale(1.06); }
+.puzzle-modal-media {
+  aspect-ratio: 16 / 10;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  overflow: hidden;
+  background: var(--color-text);
+}
+.puzzle-modal-media video { width: 100%; height: 100%; object-fit: cover; }
+.puzzle-modal-body { padding: 28px; }
+.puzzle-modal-body .puzzle-tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  margin-bottom: 12px;
+}
+.puzzle-modal-body h3 { font-size: 1.4rem; margin-bottom: 8px; }
+.puzzle-modal-body p { margin-bottom: 22px; }
 
 /* ---------- Section headers ---------- */
 .section-head { max-width: 640px; margin: 0 auto 56px; text-align: center; }

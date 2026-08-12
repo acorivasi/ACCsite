@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initHeaderScroll();
   initHeroPuzzle();
   initTextShatter();
+  initPuzzleModal();
   initReveal();
   initDomainCardVideos();
 });
@@ -132,6 +133,64 @@ function initTextShatter() {
         leaveTimer = setTimeout(shatter, 900);
       });
     }
+  });
+}
+
+/* ---------- Puzzle piece modal: tap/click a piece for a bigger view ---------- */
+function initPuzzleModal() {
+  const modal = document.querySelector("[data-puzzle-modal]");
+  const pieces = document.querySelectorAll(".puzzle-piece[data-video]");
+  if (!modal || !pieces.length) return;
+
+  const video = modal.querySelector("[data-puzzle-modal-video]");
+  const tag = modal.querySelector("[data-puzzle-modal-tag]");
+  const title = modal.querySelector("[data-puzzle-modal-title]");
+  const desc = modal.querySelector("[data-puzzle-modal-desc]");
+  let lastFocused = null;
+
+  function open(piece) {
+    const source = document.createElement("source");
+    source.src = piece.dataset.video;
+    source.type = "video/mp4";
+    video.innerHTML = "";
+    video.appendChild(source);
+    video.load();
+    video.play().catch(() => {});
+
+    tag.textContent = piece.dataset.tag || "";
+    tag.className = "puzzle-tag " + (piece.dataset.tagClass || "");
+    title.textContent = piece.dataset.title || "";
+    desc.textContent = piece.dataset.desc || "";
+
+    lastFocused = document.activeElement;
+    modal.hidden = false;
+    document.body.style.overflow = "hidden";
+    modal.querySelector(".puzzle-modal-close").focus();
+  }
+
+  function close() {
+    modal.hidden = true;
+    document.body.style.overflow = "";
+    video.pause();
+    video.innerHTML = "";
+    if (lastFocused) lastFocused.focus();
+  }
+
+  pieces.forEach((piece) => {
+    piece.addEventListener("click", () => open(piece));
+    piece.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        open(piece);
+      }
+    });
+  });
+
+  modal.querySelectorAll("[data-puzzle-modal-close]").forEach((el) => {
+    el.addEventListener("click", close);
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !modal.hidden) close();
   });
 }
 

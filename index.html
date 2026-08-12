@@ -73,47 +73,71 @@
     </svg>
 
     <div class="hero-puzzle" data-puzzle>
-      <article class="puzzle-piece jp-1">
+      <article class="puzzle-piece jp-1" tabindex="0" role="button"
+        data-video="media/video-pensiune.mp4" data-tag-class="tag-teal"
+        data-tag="Cazare & turism" data-title="Pensiune"
+        data-desc="Galerie foto/video atmosferică, camere, activități, rezervare rapidă și hartă interactivă.">
         <video muted loop playsinline autoplay preload="auto"><source src="media/video-pensiune.mp4" type="video/mp4"></video>
         <div class="puzzle-caption">
           <span class="puzzle-tag tag-teal">Cazare & turism</span>
           <h3>Pensiune</h3>
         </div>
+        <span class="tap-hint" aria-hidden="true">+</span>
       </article>
-      <article class="puzzle-piece jp-2">
+      <article class="puzzle-piece jp-2" tabindex="0" role="button"
+        data-video="media/video-restaurant.mp4" data-tag-class="tag-orange"
+        data-tag="Restaurant & local" data-title="Restaurant"
+        data-desc="Meniu digital pus în valoare, atmosferă, rezervări și comenzi la pas.">
         <video muted loop playsinline autoplay preload="auto"><source src="media/video-restaurant.mp4" type="video/mp4"></video>
         <div class="puzzle-caption">
           <span class="puzzle-tag tag-orange">Restaurant & local</span>
           <h3>Restaurant</h3>
         </div>
+        <span class="tap-hint" aria-hidden="true">+</span>
       </article>
-      <article class="puzzle-piece jp-3">
+      <article class="puzzle-piece jp-3" tabindex="0" role="button"
+        data-video="media/video-cosmetica.mp4" data-tag-class="tag-yellow"
+        data-tag="Beauty" data-title="Cosmetică"
+        data-desc="Servicii de coafură, unghii și machiaj, prețuri clare, programare online.">
         <video muted loop playsinline autoplay preload="none"><source src="media/video-cosmetica.mp4" type="video/mp4"></video>
         <div class="puzzle-caption">
           <span class="puzzle-tag tag-yellow">Beauty</span>
           <h3>Cosmetică</h3>
         </div>
+        <span class="tap-hint" aria-hidden="true">+</span>
       </article>
-      <article class="puzzle-piece jp-4">
+      <article class="puzzle-piece jp-4" tabindex="0" role="button"
+        data-video="media/video-spalatorie.mp4" data-tag-class="tag-teal"
+        data-tag="Car wash" data-title="Spălătorie auto"
+        data-desc="Pachete de spălare, prețuri, locație și program vizibile din prima secundă.">
         <video muted loop playsinline autoplay preload="auto"><source src="media/video-spalatorie.mp4" type="video/mp4"></video>
         <div class="puzzle-caption">
           <span class="puzzle-tag tag-teal">Car wash</span>
           <h3>Spălătorie auto</h3>
         </div>
+        <span class="tap-hint" aria-hidden="true">+</span>
       </article>
-      <article class="puzzle-piece jp-5">
+      <article class="puzzle-piece jp-5" tabindex="0" role="button"
+        data-video="media/video-vulcanizare.mp4" data-tag-class="tag-orange"
+        data-tag="Service & vulcanizare" data-title="Vulcanizare"
+        data-desc="Servicii, stoc anvelope, programare rapidă și încredere tehnică.">
         <video muted loop playsinline autoplay preload="none"><source src="media/video-vulcanizare.mp4" type="video/mp4"></video>
         <div class="puzzle-caption">
           <span class="puzzle-tag tag-orange">Service & vulcanizare</span>
           <h3>Vulcanizare</h3>
         </div>
+        <span class="tap-hint" aria-hidden="true">+</span>
       </article>
-      <article class="puzzle-piece jp-6">
+      <article class="puzzle-piece jp-6" tabindex="0" role="button"
+        data-video="media/video-stomatologie.mp4" data-tag-class="tag-yellow"
+        data-tag="Clinică stomatologică" data-title="Stomatologie"
+        data-desc="Ton calm și profesionist, echipă, servicii și programare fără stres.">
         <video muted loop playsinline autoplay preload="none"><source src="media/video-stomatologie.mp4" type="video/mp4"></video>
         <div class="puzzle-caption">
           <span class="puzzle-tag tag-yellow">Clinică stomatologică</span>
           <h3>Stomatologie</h3>
         </div>
+        <span class="tap-hint" aria-hidden="true">+</span>
       </article>
 
       <!-- draws the interlocking seams on top of the pieces, tracing the
@@ -128,6 +152,23 @@
         <path d="M 0.335 0.5 L 0.457 0.5 C 0.457 0.4796, 0.4702 0.432, 0.501 0.432 C 0.5318 0.432, 0.545 0.4796, 0.545 0.5 L 0.667 0.5"/>
         <path d="M 0.667 0.5 L 0.777 0.5 C 0.777 0.5204, 0.7902 0.568, 0.821 0.568 C 0.8518 0.568, 0.865 0.5204, 0.865 0.5 L 0.975 0.5"/>
       </svg>
+    </div>
+
+    <!-- opens when a piece is tapped/clicked: bigger video + full details -->
+    <div class="puzzle-modal" data-puzzle-modal hidden>
+      <div class="puzzle-modal-backdrop" data-puzzle-modal-close></div>
+      <div class="puzzle-modal-card" role="dialog" aria-modal="true" aria-labelledby="puzzle-modal-title">
+        <button class="puzzle-modal-close" data-puzzle-modal-close aria-label="Închide">&times;</button>
+        <div class="puzzle-modal-media">
+          <video muted loop playsinline autoplay data-puzzle-modal-video></video>
+        </div>
+        <div class="puzzle-modal-body">
+          <span class="puzzle-tag" data-puzzle-modal-tag></span>
+          <h3 id="puzzle-modal-title" data-puzzle-modal-title></h3>
+          <p data-puzzle-modal-desc></p>
+          <a href="contact.html" class="btn btn-primary">Cere o ofertă pentru acest domeniu</a>
+        </div>
+      </div>
     </div>
   </section>
 
