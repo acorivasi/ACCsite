@@ -59,55 +59,75 @@
   </section>
 
   <section class="hero-puzzle-section">
+    <!-- shared jigsaw silhouettes: each clipPath is defined once in objectBoundingBox
+         (0..1) fractions, so every piece rescales correctly at any viewport width -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+      <defs>
+        <clipPath id="jigsaw-p1" clipPathUnits="objectBoundingBox"><path d="M 0.025 0.04 L 0.335 0.04 L 0.335 0.226 C 0.3554 0.226, 0.403 0.2392, 0.403 0.27 C 0.403 0.3008, 0.3554 0.314, 0.335 0.314 L 0.335 0.5 L 0.224 0.5 C 0.224 0.5204, 0.2108 0.568, 0.18 0.568 C 0.1492 0.568, 0.136 0.5204, 0.136 0.5 L 0.025 0.5 L 0.025 0.04 Z"/></clipPath>
+        <clipPath id="jigsaw-p2" clipPathUnits="objectBoundingBox"><path d="M 0.335 0.04 L 0.667 0.04 L 0.667 0.226 C 0.6466 0.226, 0.599 0.2392, 0.599 0.27 C 0.599 0.3008, 0.6466 0.314, 0.667 0.314 L 0.667 0.5 L 0.545 0.5 C 0.545 0.4796, 0.5318 0.432, 0.501 0.432 C 0.4702 0.432, 0.457 0.4796, 0.457 0.5 L 0.335 0.5 L 0.335 0.314 C 0.3554 0.314, 0.403 0.3008, 0.403 0.27 C 0.403 0.2392, 0.3554 0.226, 0.335 0.226 L 0.335 0.04 Z"/></clipPath>
+        <clipPath id="jigsaw-p3" clipPathUnits="objectBoundingBox"><path d="M 0.667 0.04 L 0.975 0.04 L 0.975 0.5 L 0.865 0.5 C 0.865 0.5204, 0.8518 0.568, 0.821 0.568 C 0.7902 0.568, 0.777 0.5204, 0.777 0.5 L 0.667 0.5 L 0.667 0.314 C 0.6466 0.314, 0.599 0.3008, 0.599 0.27 C 0.599 0.2392, 0.6466 0.226, 0.667 0.226 L 0.667 0.04 Z"/></clipPath>
+        <clipPath id="jigsaw-p4" clipPathUnits="objectBoundingBox"><path d="M 0.025 0.5 L 0.136 0.5 C 0.136 0.5204, 0.1492 0.568, 0.18 0.568 C 0.2108 0.568, 0.224 0.5204, 0.224 0.5 L 0.335 0.5 L 0.335 0.686 C 0.3146 0.686, 0.267 0.6992, 0.267 0.73 C 0.267 0.7608, 0.3146 0.774, 0.335 0.774 L 0.335 0.96 L 0.335 0.96 L 0.025 0.96 Z"/></clipPath>
+        <clipPath id="jigsaw-p5" clipPathUnits="objectBoundingBox"><path d="M 0.335 0.5 L 0.457 0.5 C 0.457 0.4796, 0.4702 0.432, 0.501 0.432 C 0.5318 0.432, 0.545 0.4796, 0.545 0.5 L 0.667 0.5 L 0.667 0.686 C 0.6874 0.686, 0.735 0.6992, 0.735 0.73 C 0.735 0.7608, 0.6874 0.774, 0.667 0.774 L 0.667 0.96 L 0.667 0.96 L 0.335 0.96 L 0.335 0.774 C 0.3146 0.774, 0.267 0.7608, 0.267 0.73 C 0.267 0.6992, 0.3146 0.686, 0.335 0.686 L 0.335 0.5 Z"/></clipPath>
+        <clipPath id="jigsaw-p6" clipPathUnits="objectBoundingBox"><path d="M 0.667 0.5 L 0.777 0.5 C 0.777 0.5204, 0.7902 0.568, 0.821 0.568 C 0.8518 0.568, 0.865 0.5204, 0.865 0.5 L 0.975 0.5 L 0.975 0.5 L 0.975 0.96 L 0.667 0.96 L 0.667 0.774 C 0.6874 0.774, 0.735 0.7608, 0.735 0.73 C 0.735 0.6992, 0.6874 0.686, 0.667 0.686 L 0.667 0.5 Z"/></clipPath>
+      </defs>
+    </svg>
+
     <div class="hero-puzzle" data-puzzle>
-      <article class="puzzle-piece pp-1">
+      <article class="puzzle-piece jp-1">
         <video muted loop playsinline autoplay preload="auto"><source src="media/video-pensiune.mp4" type="video/mp4"></video>
         <div class="puzzle-caption">
           <span class="puzzle-tag tag-teal">Cazare & turism</span>
           <h3>Pensiune</h3>
-          <p>Galerie foto/video, rezervare rapidă, hartă</p>
         </div>
       </article>
-      <article class="puzzle-piece pp-2">
+      <article class="puzzle-piece jp-2">
         <video muted loop playsinline autoplay preload="auto"><source src="media/video-restaurant.mp4" type="video/mp4"></video>
         <div class="puzzle-caption">
           <span class="puzzle-tag tag-orange">Restaurant & local</span>
           <h3>Restaurant</h3>
-          <p>Meniu digital, rezervări, comenzi la pas</p>
         </div>
       </article>
-      <article class="puzzle-piece pp-3 shape-circle">
+      <article class="puzzle-piece jp-3">
         <video muted loop playsinline autoplay preload="none"><source src="media/video-cosmetica.mp4" type="video/mp4"></video>
         <div class="puzzle-caption">
           <span class="puzzle-tag tag-yellow">Beauty</span>
           <h3>Cosmetică</h3>
-          <p>Servicii, prețuri, programări</p>
         </div>
       </article>
-      <article class="puzzle-piece pp-4">
-        <video muted loop playsinline autoplay preload="none"><source src="media/video-vulcanizare.mp4" type="video/mp4"></video>
-        <div class="puzzle-caption">
-          <span class="puzzle-tag tag-orange">Service & vulcanizare</span>
-          <h3>Vulcanizare</h3>
-          <p>Servicii, stoc anvelope, programare online</p>
-        </div>
-      </article>
-      <article class="puzzle-piece pp-5">
+      <article class="puzzle-piece jp-4">
         <video muted loop playsinline autoplay preload="auto"><source src="media/video-spalatorie.mp4" type="video/mp4"></video>
         <div class="puzzle-caption">
           <span class="puzzle-tag tag-teal">Car wash</span>
           <h3>Spălătorie auto</h3>
-          <p>Pachete de spălare, program, locație</p>
         </div>
       </article>
-      <article class="puzzle-piece pp-6 shape-triangle">
+      <article class="puzzle-piece jp-5">
+        <video muted loop playsinline autoplay preload="none"><source src="media/video-vulcanizare.mp4" type="video/mp4"></video>
+        <div class="puzzle-caption">
+          <span class="puzzle-tag tag-orange">Service & vulcanizare</span>
+          <h3>Vulcanizare</h3>
+        </div>
+      </article>
+      <article class="puzzle-piece jp-6">
         <video muted loop playsinline autoplay preload="none"><source src="media/video-stomatologie.mp4" type="video/mp4"></video>
         <div class="puzzle-caption">
           <span class="puzzle-tag tag-yellow">Clinică stomatologică</span>
           <h3>Stomatologie</h3>
-          <p>Echipă, servicii, programare</p>
         </div>
       </article>
+
+      <!-- draws the interlocking seams on top of the pieces, tracing the
+           exact same curves used to cut them -->
+      <svg class="jigsaw-seams" viewBox="0 0 1 1" preserveAspectRatio="none" aria-hidden="true">
+        <path class="seam-outer" d="M 0.025 0.04 L 0.975 0.04 L 0.975 0.96 L 0.025 0.96 Z"/>
+        <path d="M 0.335 0.04 L 0.335 0.226 C 0.3554 0.226, 0.403 0.2392, 0.403 0.27 C 0.403 0.3008, 0.3554 0.314, 0.335 0.314 L 0.335 0.5"/>
+        <path d="M 0.667 0.04 L 0.667 0.226 C 0.6466 0.226, 0.599 0.2392, 0.599 0.27 C 0.599 0.3008, 0.6466 0.314, 0.667 0.314 L 0.667 0.5"/>
+        <path d="M 0.335 0.5 L 0.335 0.686 C 0.3146 0.686, 0.267 0.6992, 0.267 0.73 C 0.267 0.7608, 0.3146 0.774, 0.335 0.774 L 0.335 0.96"/>
+        <path d="M 0.667 0.5 L 0.667 0.686 C 0.6874 0.686, 0.735 0.6992, 0.735 0.73 C 0.735 0.7608, 0.6874 0.774, 0.667 0.774 L 0.667 0.96"/>
+        <path d="M 0.025 0.5 L 0.136 0.5 C 0.136 0.5204, 0.1492 0.568, 0.18 0.568 C 0.2108 0.568, 0.224 0.5204, 0.224 0.5 L 0.335 0.5"/>
+        <path d="M 0.335 0.5 L 0.457 0.5 C 0.457 0.4796, 0.4702 0.432, 0.501 0.432 C 0.5318 0.432, 0.545 0.4796, 0.545 0.5 L 0.667 0.5"/>
+        <path d="M 0.667 0.5 L 0.777 0.5 C 0.777 0.5204, 0.7902 0.568, 0.821 0.568 C 0.8518 0.568, 0.865 0.5204, 0.865 0.5 L 0.975 0.5"/>
+      </svg>
     </div>
   </section>
 

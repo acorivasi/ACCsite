@@ -308,72 +308,58 @@ section { padding: 96px 0; }
 }
 
 .hero-puzzle {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(4, 1fr);
-  grid-template-areas:
-    "p1 p1 p2 p3"
-    "p1 p1 p2 p6"
-    "p5 p5 p4 ."
-    "p5 p5 p4 .";
-  gap: 14px;
-  height: 90vh;
-  min-height: 560px;
-  max-height: 820px;
-  width: 100%;
-  padding: 0 20px 20px;
-}
-@media (max-width: 1080px) { .hero-puzzle { height: 74vh; } }
-@media (max-width: 980px) {
-  .hero-puzzle {
-    height: auto;
-    padding: 0 16px 16px;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(5, 160px);
-    grid-template-areas:
-      "p1 p1"
-      "p2 p3"
-      "p5 p5"
-      "p6 p4"
-      "p6 p4";
-  }
-  .hero-puzzle .shape-circle, .hero-puzzle .shape-triangle { clip-path: none; border-radius: var(--radius); }
-}
-@media (max-width: 560px) {
-  .hero-puzzle {
-    grid-template-columns: 1fr;
-    grid-template-rows: none;
-    grid-template-areas: none;
-  }
-  .hero-puzzle .puzzle-piece { grid-area: auto !important; aspect-ratio: 4/3; }
-}
-
-.puzzle-piece {
   position: relative;
-  border-radius: var(--radius);
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  max-height: 88vh;
+  margin: 0 auto;
+}
+@media (max-width: 900px) { .hero-puzzle { aspect-ratio: 3 / 3.2; } }
+@media (max-width: 560px) { .hero-puzzle { aspect-ratio: 3 / 4.6; } }
+
+/* draws the interlocking seams on top of the video pieces — the border
+   trick doesn't work here since every piece is a full-size box cut down
+   by clip-path, so its CSS border would trace the box, not the cut edge */
+.jigsaw-seams {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 8;
+  pointer-events: none;
+}
+.jigsaw-seams path {
+  fill: none;
+  stroke: var(--color-primary-light);
+  stroke-width: 2.5;
+  vector-effect: non-scaling-stroke;
+  filter: drop-shadow(0 0 2px rgba(17, 50, 48, 0.35));
+}
+.jigsaw-seams .seam-outer { stroke-width: 3; }
+
+/* Each piece fills the entire mosaic box; an SVG clip-path (defined once,
+   in the hidden <svg> at the top of the section) carves out its actual
+   jigsaw silhouette, tabs and all. Because the clip-paths use
+   objectBoundingBox units (0..1 fractions), they rescale automatically
+   with the container at any viewport width. */
+.puzzle-piece {
+  position: absolute;
+  inset: 0;
   overflow: hidden;
   background: var(--color-text);
-  box-shadow: var(--shadow-soft);
-  transition: transform var(--transition), box-shadow var(--transition), z-index var(--transition), clip-path 0.4s ease;
+  filter: brightness(1) saturate(1);
+  transition: filter var(--transition), z-index var(--transition);
 }
 .puzzle-piece:hover {
-  transform: scale(1.035);
-  box-shadow: var(--shadow-hover);
+  filter: brightness(1.08) saturate(1.12);
   z-index: 5;
 }
-.pp-1 { grid-area: p1; }
-.pp-2 { grid-area: p2; }
-.pp-3 { grid-area: p3; }
-.pp-4 { grid-area: p4; }
-.pp-5 { grid-area: p5; }
-.pp-6 { grid-area: p6; }
-
-/* extra puzzle-piece silhouettes, beyond the rounded rectangle */
-.shape-circle { border-radius: 0; clip-path: circle(closest-side at 50% 50%); }
-.shape-triangle { border-radius: 0; clip-path: polygon(50% 4%, 96% 96%, 4% 96%); }
-.shape-circle::after, .shape-triangle::after {
-  background: rgba(17, 50, 48, 0.4);
-}
+.jp-1 { clip-path: url(#jigsaw-p1); }
+.jp-2 { clip-path: url(#jigsaw-p2); }
+.jp-3 { clip-path: url(#jigsaw-p3); }
+.jp-4 { clip-path: url(#jigsaw-p4); }
+.jp-5 { clip-path: url(#jigsaw-p5); }
+.jp-6 { clip-path: url(#jigsaw-p6); }
 
 .puzzle-piece video {
   position: absolute;
@@ -384,50 +370,50 @@ section { padding: 96px 0; }
   opacity: 0.92;
   transition: opacity var(--transition), transform 6s ease;
 }
-.puzzle-piece:hover video { opacity: 1; transform: scale(1.06); }
+.puzzle-piece:hover video { opacity: 1; transform: scale(1.05); }
 
 .puzzle-piece::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(0deg, rgba(17,50,48,0.82) 0%, rgba(17,50,48,0.05) 50%, rgba(17,50,48,0) 70%);
+  background: linear-gradient(0deg, rgba(17,50,48,0.8) 0%, rgba(17,50,48,0.1) 45%, rgba(17,50,48,0) 65%);
   transition: opacity 0.6s ease;
 }
-.puzzle-piece:has(.puzzle-caption.is-shattering)::after { opacity: 0.4; }
-
-/* small connector dot to reinforce the "puzzle piece" read */
-.puzzle-piece::before {
-  content: "";
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.85);
-  z-index: 3;
-}
+.puzzle-piece:has(.puzzle-caption.is-shattering)::after { opacity: 0.45; }
 
 .puzzle-caption {
   position: absolute;
-  left: 14px;
-  right: 14px;
-  bottom: 12px;
   z-index: 2;
   color: var(--color-white);
 }
+/* each piece's caption is inset to sit within that piece's own cell,
+   clear of the tab bulges on its shared edges */
+/* captions sit on each piece's own straight outer edges (never on a
+   shared/tabbed seam), which naturally spreads them top/bottom/side
+   instead of stacking them all along the bottom */
+.jp-1 .puzzle-caption { top: 8%; left: 6%; right: 69%; }
+.jp-2 .puzzle-caption { top: 6%; left: 38%; right: 36%; text-align: center; }
+.jp-3 .puzzle-caption { top: 8%; left: 70%; right: 5%; text-align: right; }
+.jp-4 .puzzle-caption { bottom: 5%; left: 6%; right: 69%; }
+.jp-5 .puzzle-caption { bottom: 4%; left: 38%; right: 36%; text-align: center; }
+.jp-6 .puzzle-caption { bottom: 5%; left: 70%; right: 5%; text-align: right; }
 .puzzle-caption .puzzle-tag {
   display: inline-block;
-  font-size: 0.68rem;
+  font-size: clamp(0.56rem, 1.1vw, 0.68rem);
   font-weight: 600;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
-  padding: 4px 10px;
+  padding: 3px 8px;
   border-radius: var(--radius-pill);
-  margin-bottom: 6px;
+  margin-bottom: 5px;
   transition: opacity 0.5s ease 0.15s;
+  white-space: nowrap;
 }
 .puzzle-caption.is-shattering .puzzle-tag { opacity: 0; }
+@media (max-width: 640px) {
+  .puzzle-caption .puzzle-tag { display: none; }
+  .puzzle-caption h3 { font-size: 0.68rem; }
+}
 
 /* text-shatter effect: each character becomes a "shard" that flies apart
    and fades, then reassembles smoothly on hover (ties back to the puzzle idea) */
@@ -443,47 +429,12 @@ section { padding: 96px 0; }
   opacity: 0;
 }
 .puzzle-caption h3 {
-  font-size: 1.02rem;
-  margin: 0 0 2px;
+  font-size: clamp(0.72rem, 1.6vw, 1rem);
+  margin: 0;
+  line-height: 1.15;
 }
 .puzzle-caption p {
-  font-size: 0.78rem;
-  color: rgba(255,255,255,0.82);
-  margin: 0;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-.pp-1 .puzzle-caption p, .pp-5 .puzzle-caption p { -webkit-line-clamp: 2; }
-
-/* circle/triangle pieces are too narrow near their edges for the standard
-   bottom-anchored caption, so they get a compact, centered label instead */
-.shape-circle .puzzle-caption {
-  inset: 0;
-  left: 18%;
-  right: 18%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-.shape-triangle .puzzle-caption {
-  left: 16%;
-  right: 16%;
-  bottom: 10%;
-  text-align: center;
-}
-.shape-circle .puzzle-tag,
-.shape-triangle .puzzle-tag,
-.shape-circle .puzzle-caption p,
-.shape-triangle .puzzle-caption p {
   display: none;
-}
-.shape-circle .puzzle-caption h3,
-.shape-triangle .puzzle-caption h3 {
-  font-size: 0.9rem;
-  margin: 0;
 }
 
 /* ---------- Section headers ---------- */
