@@ -75,15 +75,17 @@ function initHeroPuzzle() {
 /* ---------- Puzzle caption text-shatter ----------
    Each caption's characters become "shards": they fly apart and fade a
    few seconds after load, then reassemble smoothly when you hover the
-   piece — a small callback to the puzzle idea itself. */
+   piece — a small callback to the puzzle idea itself. Only runs on
+   devices that can actually hover (mouse/trackpad) — on touch devices
+   there's no hover to bring the text back, so it would just vanish for
+   good; there the caption simply stays put, always visible. */
 function initTextShatter() {
   const captions = document.querySelectorAll(".puzzle-caption");
   if (!captions.length) return;
 
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (reduceMotion) return;
-
   const canHover = window.matchMedia("(hover: hover)").matches;
+  if (reduceMotion || !canHover) return;
 
   captions.forEach((caption, i) => {
     const targets = caption.querySelectorAll(".puzzle-tag, h3, p");
@@ -122,17 +124,15 @@ function initTextShatter() {
 
     setTimeout(shatter, 2800 + i * 220);
 
-    if (canHover) {
-      const piece = caption.closest(".puzzle-piece");
-      let leaveTimer = null;
-      piece.addEventListener("mouseenter", () => {
-        clearTimeout(leaveTimer);
-        reassemble();
-      });
-      piece.addEventListener("mouseleave", () => {
-        leaveTimer = setTimeout(shatter, 900);
-      });
-    }
+    const piece = caption.closest(".puzzle-piece");
+    let leaveTimer = null;
+    piece.addEventListener("mouseenter", () => {
+      clearTimeout(leaveTimer);
+      reassemble();
+    });
+    piece.addEventListener("mouseleave", () => {
+      leaveTimer = setTimeout(shatter, 900);
+    });
   });
 }
 

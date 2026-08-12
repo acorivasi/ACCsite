@@ -412,11 +412,6 @@ section { padding: 96px 0; }
   white-space: nowrap;
 }
 .puzzle-caption.is-shattering .puzzle-tag { opacity: 0; }
-@media (max-width: 640px) {
-  /* on small screens the on-piece text gets cramped and hard to read —
-     hide it and rely on the tap-hint below to open the bigger modal instead */
-  .hero-puzzle .puzzle-caption { display: none; }
-}
 
 /* small "+" badge hinting a piece can be tapped for a bigger view;
    always present for touch devices, shown on hover for pointer devices */
