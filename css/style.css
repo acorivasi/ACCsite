@@ -412,6 +412,11 @@ section { padding: 96px 0; }
   white-space: nowrap;
 }
 .puzzle-caption.is-shattering .puzzle-tag { opacity: 0; }
+@media (max-width: 640px) {
+  /* longer labels don't fit on one line in the narrower columns here —
+     let them wrap instead of overflowing past the piece's own edge */
+  .puzzle-caption .puzzle-tag { white-space: normal; line-height: 1.25; }
+}
 
 /* small "+" badge hinting a piece can be tapped for a bigger view;
    always present for touch devices, shown on hover for pointer devices */
@@ -433,11 +438,11 @@ section { padding: 96px 0; }
   z-index: 3;
   box-shadow: 0 2px 8px rgba(17, 50, 48, 0.25);
 }
+/* only on devices with real hover (desktop) — on touch it has nowhere
+   safe to sit without overlapping the always-visible caption text, and
+   the whole piece is already tappable without needing a visual hint */
 @media (hover: hover) {
   .puzzle-piece:hover .tap-hint { display: flex; }
-}
-@media (max-width: 640px) {
-  .tap-hint { display: flex; width: 30px; height: 30px; font-size: 1.3rem; }
 }
 /* positioned in each piece's own safe zone (same row band as its caption,
    opposite side) so it's never cut off by a tab/notch in the jigsaw shape */
