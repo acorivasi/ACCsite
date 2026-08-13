@@ -1,26 +1,101 @@
-// ACCsite — interactions: nav toggle, header scroll state, hero video carousel, reveal-on-scroll
+// ACCsite — interactions: theme toggle, interactive nav, mobile menu,
+// header scroll state, kinetic hero, video reel, reveal-on-scroll
+
+const THEME_KEY = "accsite-theme";
 
 document.addEventListener("DOMContentLoaded", () => {
+  initTheme();
   initNav();
+  initNavPill();
   initHeaderScroll();
-  initHeroPuzzle();
-  initTextShatter();
-  initPuzzleModal();
+  initReel();
+  initReelModal();
   initReveal();
   initDomainCardVideos();
 });
 
+/* ---------- Theme: Noir / Smarald ---------- */
+function initTheme() {
+  const root = document.documentElement;
+  const stored = localStorage.getItem(THEME_KEY);
+  if (stored === "noir" || stored === "emerald") root.setAttribute("data-theme", stored);
+
+  document.querySelectorAll("[data-theme-toggle]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const current = root.getAttribute("data-theme") === "emerald" ? "emerald" : "noir";
+      const next = current === "emerald" ? "noir" : "emerald";
+      root.setAttribute("data-theme", next);
+      localStorage.setItem(THEME_KEY, next);
+      btn.setAttribute("aria-pressed", next === "emerald" ? "true" : "false");
+    });
+  });
+}
+
+/* ---------- Mobile nav: open/close, focus, scroll lock, Escape ---------- */
 function initNav() {
   const toggle = document.querySelector(".nav-toggle");
   const nav = document.querySelector(".main-nav");
   if (!toggle || !nav) return;
+
+  function closeNav() {
+    nav.classList.remove("is-open");
+    toggle.setAttribute("aria-expanded", "false");
+    document.body.style.overflow = "";
+  }
+  function openNav() {
+    nav.classList.add("is-open");
+    toggle.setAttribute("aria-expanded", "true");
+    document.body.style.overflow = "hidden";
+  }
+
   toggle.addEventListener("click", () => {
-    const open = nav.classList.toggle("is-open");
-    toggle.setAttribute("aria-expanded", open ? "true" : "false");
+    const open = nav.classList.contains("is-open");
+    if (open) closeNav();
+    else openNav();
   });
   nav.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", () => nav.classList.remove("is-open"));
+    link.addEventListener("click", closeNav);
   });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && nav.classList.contains("is-open")) closeNav();
+  });
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 900 && nav.classList.contains("is-open")) closeNav();
+  });
+}
+
+/* ---------- Desktop nav: sliding pill highlights hover/active link ---------- */
+function initNavPill() {
+  const nav = document.querySelector(".main-nav");
+  const pill = document.querySelector("[data-nav-pill]");
+  if (!nav || !pill) return;
+  const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  if (!canHover) return;
+
+  const links = Array.from(nav.querySelectorAll("a:not(.main-nav-cta)"));
+
+  function moveTo(link) {
+    if (!link) {
+      pill.style.opacity = "0";
+      return;
+    }
+    pill.style.width = link.offsetWidth + "px";
+    pill.style.transform = `translateX(${link.offsetLeft}px)`;
+    pill.style.opacity = "1";
+  }
+
+  const active = links.find((l) => l.classList.contains("active"));
+  moveTo(active);
+
+  links.forEach((link) => {
+    link.addEventListener("mouseenter", () => moveTo(link));
+    link.addEventListener("focus", () => moveTo(link));
+  });
+  nav.addEventListener("mouseleave", () => moveTo(active));
+  nav.addEventListener("focusout", (e) => {
+    if (!nav.contains(e.relatedTarget)) moveTo(active);
+  });
+  window.addEventListener("resize", () => moveTo(nav.querySelector("a:hover") || active));
 }
 
 function initHeaderScroll() {
@@ -48,113 +123,63 @@ function initReveal() {
   items.forEach((item) => io.observe(item));
 }
 
-/* ---------- Hero puzzle mosaic ---------- */
-function initHeroPuzzle() {
-  // videos autoplay natively (muted loop playsinline autoplay); no extra
-  // JS needed. An earlier version paused pieces via IntersectionObserver
-  // while the section was still below the fold, which raced with the
-  // native autoplay and left most pieces stuck paused — removed.
-  const root = document.querySelector("[data-puzzle]");
-  if (!root) return;
-  root.querySelectorAll(".puzzle-piece video").forEach((video) => {
-    video.play().catch(() => {});
-  });
+/* ---------- Reel: the six category videos, in continuous motion ----------
+   The strip scrolls via a pure-CSS animation (runs off the main thread).
+   JS only decides which of the (doubled, for a seamless loop) tiles should
+   actually be decoding video at any moment — playing all 12 at once would
+   be wasteful, so each tile's video loads and plays only while its tile is
+   near the viewport, and pauses again once it scrolls away. */
+function initReel() {
+  const tiles = document.querySelectorAll(".reel-tile[data-video]");
+  if (!tiles.length) return;
+
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        const video = entry.target.querySelector("video");
+        if (!video) return;
+        if (entry.isIntersecting) {
+          if (!video.currentSrc) video.load();
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      });
+    },
+    { rootMargin: "200px" }
+  );
+  tiles.forEach((tile) => io.observe(tile));
 }
 
-/* ---------- Puzzle caption text-shatter ----------
-   Each caption's characters become "shards": they fly apart and fade a
-   few seconds after load, then reassemble smoothly when you hover the
-   piece — a small callback to the puzzle idea itself. Only runs on
-   devices that can actually hover (mouse/trackpad) — on touch devices
-   there's no hover to bring the text back, so it would just vanish for
-   good; there the caption simply stays put, always visible. */
-function initTextShatter() {
-  const captions = document.querySelectorAll(".puzzle-caption");
-  if (!captions.length) return;
+/* ---------- Reel tile modal: tap/click a tile for a bigger view ---------- */
+function initReelModal() {
+  const modal = document.querySelector("[data-reel-modal]");
+  const tiles = document.querySelectorAll(".reel-tile[data-video]");
+  if (!modal || !tiles.length) return;
 
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const canHover = window.matchMedia("(hover: hover)").matches;
-  if (reduceMotion || !canHover) return;
-
-  captions.forEach((caption, i) => {
-    const targets = caption.querySelectorAll(".puzzle-tag, h3, p");
-    targets.forEach((el) => {
-      const text = el.textContent;
-      el.textContent = "";
-      Array.from(text).forEach((ch) => {
-        const shard = document.createElement("span");
-        shard.className = "shard";
-        shard.textContent = ch === " " ? " " : ch;
-        el.appendChild(shard);
-      });
-    });
-
-    const shards = caption.querySelectorAll(".shard");
-
-    function shatter() {
-      shards.forEach((shard, idx) => {
-        const tx = (Math.random() * 140 - 70).toFixed(0) + "px";
-        const ty = (Math.random() * -120 - 20).toFixed(0) + "px";
-        const rot = (Math.random() * 160 - 80).toFixed(0) + "deg";
-        shard.style.setProperty("--tx", tx);
-        shard.style.setProperty("--ty", ty);
-        shard.style.setProperty("--rot", rot);
-        shard.style.transitionDelay = idx * 10 + "ms";
-      });
-      caption.classList.add("is-shattering");
-    }
-
-    function reassemble() {
-      shards.forEach((shard, idx) => {
-        shard.style.transitionDelay = idx * 8 + "ms";
-      });
-      caption.classList.remove("is-shattering");
-    }
-
-    setTimeout(shatter, 2800 + i * 220);
-
-    const piece = caption.closest(".puzzle-piece");
-    let leaveTimer = null;
-    piece.addEventListener("mouseenter", () => {
-      clearTimeout(leaveTimer);
-      reassemble();
-    });
-    piece.addEventListener("mouseleave", () => {
-      leaveTimer = setTimeout(shatter, 900);
-    });
-  });
-}
-
-/* ---------- Puzzle piece modal: tap/click a piece for a bigger view ---------- */
-function initPuzzleModal() {
-  const modal = document.querySelector("[data-puzzle-modal]");
-  const pieces = document.querySelectorAll(".puzzle-piece[data-video]");
-  if (!modal || !pieces.length) return;
-
-  const video = modal.querySelector("[data-puzzle-modal-video]");
-  const tag = modal.querySelector("[data-puzzle-modal-tag]");
-  const title = modal.querySelector("[data-puzzle-modal-title]");
-  const desc = modal.querySelector("[data-puzzle-modal-desc]");
+  const video = modal.querySelector("[data-reel-modal-video]");
+  const tag = modal.querySelector("[data-reel-modal-tag]");
+  const title = modal.querySelector("[data-reel-modal-title]");
+  const desc = modal.querySelector("[data-reel-modal-desc]");
   let lastFocused = null;
 
-  function open(piece) {
+  function open(tile) {
     const source = document.createElement("source");
-    source.src = piece.dataset.video;
+    source.src = tile.dataset.video;
     source.type = "video/mp4";
     video.innerHTML = "";
     video.appendChild(source);
     video.load();
     video.play().catch(() => {});
 
-    tag.textContent = piece.dataset.tag || "";
-    tag.className = "puzzle-tag " + (piece.dataset.tagClass || "");
-    title.textContent = piece.dataset.title || "";
-    desc.textContent = piece.dataset.desc || "";
+    tag.textContent = tile.dataset.tag || "";
+    title.textContent = tile.dataset.title || "";
+    desc.textContent = tile.dataset.desc || "";
 
     lastFocused = document.activeElement;
     modal.hidden = false;
     document.body.style.overflow = "hidden";
-    modal.querySelector(".puzzle-modal-close").focus();
+    modal.querySelector(".reel-modal-close").focus();
   }
 
   function close() {
@@ -165,17 +190,18 @@ function initPuzzleModal() {
     if (lastFocused) lastFocused.focus();
   }
 
-  pieces.forEach((piece) => {
-    piece.addEventListener("click", () => open(piece));
-    piece.addEventListener("keydown", (e) => {
+  tiles.forEach((tile) => {
+    if (tile.hasAttribute("aria-hidden")) return;
+    tile.addEventListener("click", () => open(tile));
+    tile.addEventListener("keydown", (e) => {
       if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
-        open(piece);
+        open(tile);
       }
     });
   });
 
-  modal.querySelectorAll("[data-puzzle-modal-close]").forEach((el) => {
+  modal.querySelectorAll("[data-reel-modal-close]").forEach((el) => {
     el.addEventListener("click", close);
   });
   document.addEventListener("keydown", (e) => {
