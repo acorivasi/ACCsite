@@ -307,7 +307,7 @@ section { padding: 104px 0; }
 .i-mark {
   position: absolute;
   left: 50%;
-  bottom: 0.65em;
+  bottom: 0.95em;
   width: 0.85em;
   height: 0.85em;
   transform: translateX(-50%) scale(0.4);
