@@ -451,12 +451,13 @@ section { padding: 104px 0; }
   .main-nav.is-open a:nth-child(3):not(.main-nav-cta) { transition-delay: 110ms; }
   .main-nav.is-open a:nth-child(4):not(.main-nav-cta) { transition-delay: 160ms; }
   .main-nav.is-open a:nth-child(5):not(.main-nav-cta) { transition-delay: 210ms; }
+  .main-nav.is-open a:nth-child(6):not(.main-nav-cta) { transition-delay: 260ms; }
   .main-nav-cta {
     display: inline-flex;
     margin-top: 20px;
     opacity: 0;
     transform: translateY(10px);
-    transition: opacity 380ms var(--ease-out) 260ms, transform 380ms var(--ease-out) 260ms;
+    transition: opacity 380ms var(--ease-out) 310ms, transform 380ms var(--ease-out) 310ms;
   }
   .main-nav.is-open .main-nav-cta { opacity: 1; transform: translateY(0); }
   .header-cta .btn-primary { display: none; }
@@ -750,6 +751,7 @@ section { padding: 104px 0; }
 }
 .reel-modal-body h3 { font-family: var(--font-display); font-weight: 500; font-size: 1.5rem; margin-bottom: 8px; }
 .reel-modal-body p { margin-bottom: 24px; }
+.reel-modal-actions { display: flex; flex-wrap: wrap; gap: 12px; }
 
 /* domain / reel accent chips — one restrained accent, not three loud ones */
 .tag-teal, .tag-orange, .tag-yellow {
@@ -1078,3 +1080,166 @@ form.contact-form { display: flex; flex-direction: column; gap: 16px; }
   .marquee-track { animation: none; }
   .reveal { opacity: 1; transform: none; transition: none; }
 }
+
+/* ---------- Configurator ---------- */
+.config-category-banner {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 18px auto 0;
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  color: var(--color-text-light);
+}
+.config-category-banner strong { color: var(--color-primary); }
+
+.configurator {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 48px;
+  align-items: start;
+}
+@media (max-width: 1000px) {
+  .configurator { grid-template-columns: 1fr; }
+}
+
+.configurator-form { display: flex; flex-direction: column; gap: 40px; }
+
+.config-group-title {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 1.08rem;
+  margin: 0 0 16px;
+}
+
+.config-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 12px;
+}
+
+.config-option { position: relative; cursor: pointer; }
+.config-option input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+.config-option-body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  height: 100%;
+  padding: 16px 18px;
+  border-radius: var(--radius);
+  border: 1.5px solid var(--color-border);
+  background: var(--color-surface);
+  transition: border-color var(--transition), box-shadow var(--transition), background-color var(--transition-color);
+}
+.config-option-body strong { font-family: var(--font-heading); font-weight: 600; font-size: 0.98rem; }
+.config-option-desc { font-size: 0.85rem; color: var(--color-text-light); }
+.config-option-price {
+  margin-top: auto;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: var(--color-primary);
+}
+@media (hover: hover) and (pointer: fine) {
+  .config-option:hover .config-option-body { border-color: var(--color-primary); }
+}
+.config-option input:checked + .config-option-body {
+  border-color: var(--color-primary);
+  background: var(--color-primary-light);
+  box-shadow: 0 0 0 1px var(--color-primary);
+}
+.config-option input:focus-visible + .config-option-body {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.config-stepper {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 18px;
+  border-radius: var(--radius);
+  border: 1.5px solid var(--color-border);
+  background: var(--color-surface);
+  width: fit-content;
+}
+.stepper-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1.5px solid var(--color-border);
+  background: transparent;
+  color: var(--color-text);
+  font-size: 1.2rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color var(--transition), color var(--transition);
+}
+.stepper-btn:hover, .stepper-btn:focus-visible { border-color: var(--color-primary); color: var(--color-primary); }
+.stepper-value {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.15rem;
+  min-width: 1.4em;
+  text-align: center;
+}
+.config-stepper .config-option-desc { margin-left: 4px; }
+
+.config-summary {
+  position: sticky;
+  top: 96px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  transition: background-color var(--transition-color), border-color var(--transition);
+}
+.config-summary h3 { font-family: var(--font-heading); font-size: 1.1rem; margin: 0 0 16px; }
+.config-summary-list {
+  list-style: none;
+  margin: 0 0 18px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 24px;
+}
+.config-summary-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 0.9rem;
+  color: var(--color-text-light);
+}
+.config-summary-list li span:last-child { color: var(--color-text); font-family: var(--font-heading); font-weight: 500; white-space: nowrap; }
+.config-summary-empty { font-size: 0.9rem; color: var(--color-text-light); }
+
+.config-summary-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-top: 16px;
+  border-top: 1px solid var(--color-border);
+  font-family: var(--font-heading);
+}
+.config-summary-total strong { font-size: 1.4rem; color: var(--color-primary); }
+.config-summary-monthly {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-top: 8px;
+  font-family: var(--font-heading);
+  font-size: 0.92rem;
+  color: var(--color-text-light);
+}
+.config-summary-note { font-size: 0.82rem; color: var(--color-text-light); margin: 14px 0 0; }
+.config-summary-actions { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }

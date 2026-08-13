@@ -12,6 +12,8 @@ document.addEventListener("DOMContentLoaded", () => {
   initReelModal();
   initReveal();
   initDomainCardVideos();
+  initConfigurator();
+  initContactPrefill();
 });
 
 /* ---------- Theme: Noir / Smarald ---------- */
@@ -161,6 +163,7 @@ function initReelModal() {
   const tag = modal.querySelector("[data-reel-modal-tag]");
   const title = modal.querySelector("[data-reel-modal-title]");
   const desc = modal.querySelector("[data-reel-modal-desc]");
+  const configureLink = modal.querySelector("[data-reel-modal-configure]");
   let lastFocused = null;
 
   function open(tile) {
@@ -175,6 +178,9 @@ function initReelModal() {
     tag.textContent = tile.dataset.tag || "";
     title.textContent = tile.dataset.title || "";
     desc.textContent = tile.dataset.desc || "";
+    if (configureLink && tile.dataset.title) {
+      configureLink.href = `configurator.html?tip=${encodeURIComponent(tile.dataset.title)}`;
+    }
 
     lastFocused = document.activeElement;
     modal.hidden = false;
@@ -218,4 +224,118 @@ function initDomainCardVideos() {
     card.addEventListener("mouseenter", () => video.play().catch(() => {}));
     card.addEventListener("mouseleave", () => video.pause());
   });
+}
+
+/* ---------- Configurator: build a package, see a live estimate ----------
+   Prices below are placeholders — edit the data-price / data-price-monthly
+   attributes in configurator.html to match ACCsite's real pricing. */
+function initConfigurator() {
+  const form = document.querySelector("[data-config-form]");
+  if (!form) return;
+
+  const summaryList = document.querySelector("[data-config-summary-list]");
+  const totalEl = document.querySelector("[data-config-total]");
+  const monthlyWrap = document.querySelector("[data-config-monthly]");
+  const monthlyEl = document.querySelector("[data-config-monthly-value]");
+  const waBtn = document.querySelector("[data-config-whatsapp]");
+  const contactBtn = document.querySelector("[data-config-contact]");
+  const steppers = document.querySelectorAll("[data-config-stepper]");
+
+  const categoryBanner = document.querySelector("[data-config-category-banner]");
+  const category = new URLSearchParams(window.location.search).get("tip");
+  if (categoryBanner && category) {
+    categoryBanner.hidden = false;
+    categoryBanner.querySelector("[data-config-category-value]").textContent = category;
+  }
+
+  steppers.forEach((stepper) => {
+    const valueEl = stepper.querySelector("[data-stepper-value]");
+    const min = Number(stepper.dataset.min || 0);
+    const max = Number(stepper.dataset.max || 99);
+    stepper.querySelectorAll(".stepper-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const delta = Number(btn.dataset.step);
+        const next = Math.min(max, Math.max(min, Number(valueEl.textContent) + delta));
+        valueEl.textContent = next;
+        update();
+      });
+    });
+  });
+
+  form.addEventListener("change", update);
+
+  function collect() {
+    const items = [];
+    let total = 0;
+    let monthly = 0;
+
+    form.querySelectorAll('input[type="radio"]:checked, input[type="checkbox"]:checked').forEach((input) => {
+      const price = Number(input.dataset.price || 0);
+      const priceMonthly = Number(input.dataset.priceMonthly || 0);
+      const label = input.dataset.label || input.closest(".config-option")?.querySelector("strong")?.textContent || "";
+      if (!label) return;
+      items.push({ label, price, priceMonthly });
+      total += price;
+      monthly += priceMonthly;
+    });
+
+    steppers.forEach((stepper) => {
+      const count = Number(stepper.querySelector("[data-stepper-value]").textContent);
+      if (count <= 0) return;
+      const price = count * Number(stepper.dataset.pricePer || 0);
+      items.push({ label: `${stepper.dataset.label || "Extra"}: ${count}`, price, priceMonthly: 0 });
+      total += price;
+    });
+
+    return { items, total, monthly };
+  }
+
+  function buildMessage(items, total, monthly) {
+    const lines = ["Bună! Vreau o ofertă pentru un pachet ACCsite:"];
+    if (category) lines.push(`Domeniu: ${category}`);
+    items.forEach((item) => {
+      const priceLabel = item.priceMonthly ? `${item.priceMonthly} RON/lună` : item.price ? `${item.price} RON` : "inclus";
+      lines.push(`• ${item.label} — ${priceLabel}`);
+    });
+    lines.push(`Total estimativ: ${total} RON${monthly ? ` + ${monthly} RON/lună` : ""}`);
+    return lines.join("\n");
+  }
+
+  function update() {
+    const { items, total, monthly } = collect();
+
+    summaryList.innerHTML = items.length
+      ? items
+          .map((item) => {
+            const priceLabel = item.priceMonthly ? `${item.priceMonthly} RON/lună` : item.price ? `${item.price} RON` : "inclus";
+            return `<li><span>${item.label}</span><span>${priceLabel}</span></li>`;
+          })
+          .join("")
+      : '<li class="config-summary-empty">Alege opțiunile de mai sus pentru a vedea pachetul tău</li>';
+
+    totalEl.textContent = `${total} RON`;
+    if (monthly > 0) {
+      monthlyWrap.hidden = false;
+      monthlyEl.textContent = `${monthly} RON/lună`;
+    } else {
+      monthlyWrap.hidden = true;
+    }
+
+    const message = buildMessage(items, total, monthly);
+    if (waBtn) waBtn.href = `https://wa.me/40727731227?text=${encodeURIComponent(message)}`;
+    if (contactBtn) contactBtn.href = `contact.html?pachet=${encodeURIComponent(message)}`;
+  }
+
+  update();
+}
+
+/* ---------- Contact page: prefill message when arriving from the configurator ---------- */
+function initContactPrefill() {
+  const textarea = document.getElementById("mesaj");
+  if (!textarea) return;
+  const pachet = new URLSearchParams(window.location.search).get("pachet");
+  if (!pachet) return;
+  textarea.value = pachet;
+  const note = document.querySelector("[data-config-note]");
+  if (note) note.hidden = false;
 }
