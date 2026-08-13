@@ -12,9 +12,9 @@
   --color-surface: #16161a;
   --bg-rgb: 10, 10, 11;
 
-  --color-primary: #c9a24a;
-  --color-primary-dark: #a9822f;
-  --color-primary-light: rgba(201, 162, 74, 0.14);
+  --color-primary: #2bb3ad;
+  --color-primary-dark: #1f8f8a;
+  --color-primary-light: rgba(43, 179, 173, 0.14);
 
   --color-secondary: #e7e4da;
   --color-secondary-dark: #cfccc0;
@@ -38,9 +38,9 @@
 
   --shadow-soft: 0 16px 40px rgba(0, 0, 0, 0.45);
   --shadow-hover: 0 26px 64px rgba(0, 0, 0, 0.55);
-  --shadow-btn: 0 10px 26px rgba(201, 162, 74, 0.25);
+  --shadow-btn: 0 10px 26px rgba(43, 179, 173, 0.28);
 
-  --color-glow-rgb: 244, 242, 236;
+  --color-glow-rgb: 43, 179, 173;
 
   color-scheme: dark;
 }
@@ -214,7 +214,7 @@ section { padding: 104px 0; }
 }
 .btn-primary:hover, .btn-primary:focus-visible {
   background: var(--color-primary-dark);
-  box-shadow: 0 16px 34px rgba(201, 162, 74, 0.3);
+  box-shadow: 0 16px 34px rgba(43, 179, 173, 0.32);
 }
 [data-theme="emerald"] .btn-primary:hover { box-shadow: 0 16px 34px rgba(201, 106, 69, 0.34); }
 
@@ -347,7 +347,7 @@ section { padding: 104px 0; }
   width: 46px;
   height: 26px;
   border-radius: var(--radius-pill);
-  background: linear-gradient(90deg, #c9a24a 50%, #c96a45 50%);
+  background: linear-gradient(90deg, #2bb3ad 50%, #c96a45 50%);
   display: flex;
   align-items: center;
   padding: 3px;
@@ -439,14 +439,13 @@ section { padding: 104px 0; }
   .main-nav, .main-nav a, .main-nav-cta { transition: opacity 200ms ease !important; transform: none !important; }
 }
 
-/* ---------- Hero: kinetic entrance ---------- */
+/* ---------- Hero: kinetic entrance (a second, quieter beat — the reel above is the true hero image) ---------- */
 .hero-kinetic {
   position: relative;
-  min-height: min(94vh, 900px);
   display: flex;
   align-items: center;
   overflow: hidden;
-  padding: 128px 0 72px;
+  padding: 88px 0 96px;
   isolation: isolate;
   background: var(--color-bg);
   transition: background-color var(--transition-color);
@@ -566,6 +565,16 @@ section { padding: 104px 0; }
   background: var(--color-bg-alt);
   padding: 22px 0;
   transition: background-color var(--transition-color), border-color var(--transition);
+}
+/* first thing under the header — this reel *is* the hero image, so it gets
+   room to breathe and bigger tiles instead of reading as a supporting strip */
+.reel-section-hero {
+  border-top: none;
+  padding: 40px 0 48px;
+}
+.reel-section-hero .reel-tile { width: clamp(240px, 24vw, 360px); }
+@media (max-width: 640px) {
+  .reel-section-hero { padding: 28px 0 36px; }
 }
 .reel-ticks {
   height: 8px;
