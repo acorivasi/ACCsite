@@ -288,12 +288,21 @@ section { padding: 104px 0; }
   gap: 9px;
 }
 .logo span { color: var(--color-primary); }
-.logo .logo-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--color-primary);
-  display: inline-block;
+
+/* ---------- Logo mark: grid of six — the six domains, one lit ---------- */
+.logo-mark { width: 26px; height: 26px; flex-shrink: 0; }
+.logo-mark .cell-lit {
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: logo-mark-in 1.6s var(--ease-out) 1;
+}
+@keyframes logo-mark-in {
+  0% { transform: scale(0.4); opacity: 0; }
+  55% { transform: scale(1.15); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .logo-mark .cell-lit { animation: none; }
 }
 
 /* ---------- Interactive nav (desktop): sliding pill indicator ---------- */
