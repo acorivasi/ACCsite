@@ -278,20 +278,20 @@ section { padding: 104px 0; }
 }
 
 .logo {
-  font-family: var(--font-display);
-  font-weight: 500;
-  font-size: 1.5rem;
-  letter-spacing: -0.01em;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.35rem;
+  letter-spacing: -0.03em;
   color: var(--color-text);
   display: flex;
   align-items: center;
-  gap: 9px;
+  gap: 8px;
 }
 .logo span { color: var(--color-primary); }
 
-/* ---------- Logo mark: grid of six — the six domains, one lit ---------- */
+/* ---------- Logo mark: frame corners — fixed brand colors, not theme-bound ---------- */
 .logo-mark { width: 26px; height: 26px; flex-shrink: 0; }
-.logo-mark .cell-lit {
+.logo-mark .mark-dot {
   transform-origin: center;
   transform-box: fill-box;
   animation: logo-mark-in 1.6s var(--ease-out) 1;
@@ -302,7 +302,7 @@ section { padding: 104px 0; }
   100% { transform: scale(1); opacity: 1; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .logo-mark .cell-lit { animation: none; }
+  .logo-mark .mark-dot { animation: none; }
 }
 
 /* ---------- Interactive nav (desktop): sliding pill indicator ---------- */
