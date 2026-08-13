@@ -46,43 +46,44 @@
 }
 
 [data-theme="emerald"] {
-  /* -- Smarald: crem/camel cald, verde smarald adânc -- */
-  --color-bg: #f2e9d6;
-  --color-bg-alt: #ecdfc2;
-  --color-surface: #fbf6ec;
-  --bg-rgb: 242, 233, 214;
+  /* -- Smarald: verde smarald adânc, text alb, accent cărămiziu cald —
+     aceeași gravitate ca Noir, fără urmă de bej/camel -- */
+  --color-bg: #0d211a;
+  --color-bg-alt: #12291f;
+  --color-surface: #173225;
+  --bg-rgb: 13, 33, 26;
 
-  --color-primary: #0f6b4a;
-  --color-primary-dark: #0a4f37;
-  --color-primary-light: rgba(15, 107, 74, 0.1);
+  --color-primary: #c96a45;
+  --color-primary-dark: #a2502f;
+  --color-primary-light: rgba(201, 106, 69, 0.16);
 
-  --color-secondary: #ad8a56;
-  --color-secondary-dark: #8c6f42;
-  --color-secondary-light: rgba(173, 138, 86, 0.14);
+  --color-secondary: #eef0ea;
+  --color-secondary-dark: #d7dcd0;
+  --color-secondary-light: rgba(238, 240, 234, 0.1);
 
   --color-accent: var(--color-primary);
   --color-accent-dark: var(--color-primary-dark);
-  --color-on-accent: #f7f2e6;
+  --color-on-accent: #1a0e08;
 
-  --color-whatsapp: #1f9e57;
-  --color-whatsapp-dark: #18854a;
+  --color-whatsapp: #25d366;
+  --color-whatsapp-dark: #1ebc59;
 
-  --color-text: #17281f;
-  --color-text-light: #5d6c60;
+  --color-text: #f5f2ea;
+  --color-text-light: #9fb0a3;
   --color-white: #ffffff;
-  --color-border: rgba(23, 40, 31, 0.14);
+  --color-border: rgba(245, 242, 234, 0.13);
 
-  --color-media-bg: #14261d;
-  --color-media-rgb: 12, 22, 17;
-  --color-ink: #122219;
+  --color-media-bg: #0a1a13;
+  --color-media-rgb: 6, 16, 11;
+  --color-ink: #081712;
 
-  --shadow-soft: 0 16px 40px rgba(23, 40, 31, 0.14);
-  --shadow-hover: 0 26px 60px rgba(23, 40, 31, 0.2);
-  --shadow-btn: 0 10px 24px rgba(15, 107, 74, 0.28);
+  --shadow-soft: 0 16px 40px rgba(4, 12, 9, 0.5);
+  --shadow-hover: 0 26px 64px rgba(4, 12, 9, 0.58);
+  --shadow-btn: 0 10px 26px rgba(201, 106, 69, 0.28);
 
-  --color-glow-rgb: 15, 107, 74;
+  --color-glow-rgb: 201, 106, 69;
 
-  color-scheme: light;
+  color-scheme: dark;
 }
 
 :root {
@@ -215,7 +216,7 @@ section { padding: 104px 0; }
   background: var(--color-primary-dark);
   box-shadow: 0 16px 34px rgba(201, 162, 74, 0.3);
 }
-[data-theme="emerald"] .btn-primary:hover { box-shadow: 0 16px 34px rgba(15, 107, 74, 0.32); }
+[data-theme="emerald"] .btn-primary:hover { box-shadow: 0 16px 34px rgba(201, 106, 69, 0.34); }
 
 .btn-secondary {
   background: var(--color-secondary);
@@ -346,7 +347,7 @@ section { padding: 104px 0; }
   width: 46px;
   height: 26px;
   border-radius: var(--radius-pill);
-  background: linear-gradient(90deg, #0a0a0b 50%, #0f6b4a 50%);
+  background: linear-gradient(90deg, #c9a24a 50%, #c96a45 50%);
   display: flex;
   align-items: center;
   padding: 3px;
