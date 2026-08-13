@@ -1,7 +1,12 @@
-// ACCsite — interactions: nav toggle, header scroll state, hero video carousel, reveal-on-scroll
+// ACCsite — interactions: theme toggle, interactive nav, mobile menu,
+// header scroll state, hero video mosaic, reveal-on-scroll
+
+const THEME_KEY = "accsite-theme";
 
 document.addEventListener("DOMContentLoaded", () => {
+  initTheme();
   initNav();
+  initNavPill();
   initHeaderScroll();
   initHeroPuzzle();
   initTextShatter();
@@ -10,17 +15,88 @@ document.addEventListener("DOMContentLoaded", () => {
   initDomainCardVideos();
 });
 
+/* ---------- Theme: Noir / Smarald ---------- */
+function initTheme() {
+  const root = document.documentElement;
+  const stored = localStorage.getItem(THEME_KEY);
+  if (stored === "noir" || stored === "emerald") root.setAttribute("data-theme", stored);
+
+  document.querySelectorAll("[data-theme-toggle]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const current = root.getAttribute("data-theme") === "emerald" ? "emerald" : "noir";
+      const next = current === "emerald" ? "noir" : "emerald";
+      root.setAttribute("data-theme", next);
+      localStorage.setItem(THEME_KEY, next);
+      btn.setAttribute("aria-pressed", next === "emerald" ? "true" : "false");
+    });
+  });
+}
+
+/* ---------- Mobile nav: open/close, focus, scroll lock, Escape ---------- */
 function initNav() {
   const toggle = document.querySelector(".nav-toggle");
   const nav = document.querySelector(".main-nav");
   if (!toggle || !nav) return;
+
+  function closeNav() {
+    nav.classList.remove("is-open");
+    toggle.setAttribute("aria-expanded", "false");
+    document.body.style.overflow = "";
+  }
+  function openNav() {
+    nav.classList.add("is-open");
+    toggle.setAttribute("aria-expanded", "true");
+    document.body.style.overflow = "hidden";
+  }
+
   toggle.addEventListener("click", () => {
-    const open = nav.classList.toggle("is-open");
-    toggle.setAttribute("aria-expanded", open ? "true" : "false");
+    const open = nav.classList.contains("is-open");
+    if (open) closeNav();
+    else openNav();
   });
   nav.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", () => nav.classList.remove("is-open"));
+    link.addEventListener("click", closeNav);
   });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && nav.classList.contains("is-open")) closeNav();
+  });
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 900 && nav.classList.contains("is-open")) closeNav();
+  });
+}
+
+/* ---------- Desktop nav: sliding pill highlights hover/active link ---------- */
+function initNavPill() {
+  const nav = document.querySelector(".main-nav");
+  const pill = document.querySelector("[data-nav-pill]");
+  if (!nav || !pill) return;
+  const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  if (!canHover) return;
+
+  const links = Array.from(nav.querySelectorAll("a:not(.main-nav-cta)"));
+
+  function moveTo(link) {
+    if (!link) {
+      pill.style.opacity = "0";
+      return;
+    }
+    pill.style.width = link.offsetWidth + "px";
+    pill.style.transform = `translateX(${link.offsetLeft}px)`;
+    pill.style.opacity = "1";
+  }
+
+  const active = links.find((l) => l.classList.contains("active"));
+  moveTo(active);
+
+  links.forEach((link) => {
+    link.addEventListener("mouseenter", () => moveTo(link));
+    link.addEventListener("focus", () => moveTo(link));
+  });
+  nav.addEventListener("mouseleave", () => moveTo(active));
+  nav.addEventListener("focusout", (e) => {
+    if (!nav.contains(e.relatedTarget)) moveTo(active);
+  });
+  window.addEventListener("resize", () => moveTo(nav.querySelector("a:hover") || active));
 }
 
 function initHeaderScroll() {
@@ -50,10 +126,6 @@ function initReveal() {
 
 /* ---------- Hero puzzle mosaic ---------- */
 function initHeroPuzzle() {
-  // videos autoplay natively (muted loop playsinline autoplay); no extra
-  // JS needed. An earlier version paused pieces via IntersectionObserver
-  // while the section was still below the fold, which raced with the
-  // native autoplay and left most pieces stuck paused — removed.
   const root = document.querySelector("[data-puzzle]");
   if (!root) return;
   root.querySelectorAll(".puzzle-piece video").forEach((video) => {
@@ -61,13 +133,7 @@ function initHeroPuzzle() {
   });
 }
 
-/* ---------- Puzzle caption text-shatter ----------
-   Each caption's characters become "shards": they fly apart and fade a
-   few seconds after load, then reassemble smoothly when you hover the
-   piece — a small callback to the puzzle idea itself. Only runs on
-   devices that can actually hover (mouse/trackpad) — on touch devices
-   there's no hover to bring the text back, so it would just vanish for
-   good; there the caption simply stays put, always visible. */
+/* ---------- Puzzle caption text-shatter ---------- */
 function initTextShatter() {
   const captions = document.querySelectorAll(".puzzle-caption");
   if (!captions.length) return;
@@ -84,7 +150,7 @@ function initTextShatter() {
       Array.from(text).forEach((ch) => {
         const shard = document.createElement("span");
         shard.className = "shard";
-        shard.textContent = ch === " " ? " " : ch;
+        shard.textContent = ch === " " ? " " : ch;
         el.appendChild(shard);
       });
     });
@@ -125,7 +191,7 @@ function initTextShatter() {
   });
 }
 
-/* ---------- Puzzle piece modal: tap/click a piece for a bigger view ---------- */
+/* ---------- Puzzle piece modal ---------- */
 function initPuzzleModal() {
   const modal = document.querySelector("[data-puzzle-modal]");
   const pieces = document.querySelectorAll(".puzzle-piece[data-video]");

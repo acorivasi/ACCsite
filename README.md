@@ -9,8 +9,17 @@ Site de prezentare — portofoliu creare website-uri pentru afaceri mici locale.
 - `portofoliu.html` — direcțiile de design pentru fiecare domeniu
 - `contact.html` — formular și metode de contact
 - `css/style.css` — design system (culori, tipografie, componente)
-- `js/main.js` — meniu mobil, carusel video, animații la scroll
+- `js/main.js` — temă, meniu interactiv, carusel video, animații la scroll
 - `media/` — clipurile video generate (Leonardo) pentru cele 6 domenii
+
+## Teme
+
+Site-ul are două teme, comutabile din header (butonul oval de lângă CTA) și persistate în `localStorage`:
+
+- **Noir** (implicit) — fundal negru, text alb, accent auriu discret
+- **Smarald** — fundal crem/camel, text și accente verde smarald
+
+Temele sunt definite ca variabile CSS în `css/style.css`, sub `:root`/`[data-theme="noir"]` și `[data-theme="emerald"]`.
 
 ## Rulare locală
 
