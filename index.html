@@ -48,16 +48,22 @@
 
 <main>
 
-  <section class="hero">
-    <div class="container hero-intro reveal is-visible">
+  <section class="hero-kinetic">
+    <div class="hero-grain" aria-hidden="true"></div>
+    <div class="hero-spotlight" aria-hidden="true"></div>
+    <div class="container hero-kinetic-inner">
       <span class="eyebrow">Studio web pentru afaceri locale de calitate</span>
-      <h1>Website-uri gândite <span class="accent">ca un brand</span>, nu <span class="accent-2">ca un formular</span></h1>
-      <p class="lead">Proiectăm și construim prezențe online pentru pensiuni, restaurante, saloane, spălătorii auto, vulcanizări și clinici — cu un design la nivelul serviciilor pe care le oferi, gata în câteva zile.</p>
-      <div class="hero-actions">
+      <h1 class="hero-title">
+        <span class="reveal-line" style="--i:0"><span class="reveal-line-inner">Website-uri gândite</span></span>
+        <span class="reveal-line" style="--i:1"><span class="reveal-line-inner">ca un brand,</span></span>
+        <span class="reveal-line" style="--i:2"><span class="reveal-line-inner">nu ca un formular.</span></span>
+      </h1>
+      <p class="lead" style="--d:4">Proiectăm și construim prezențe online pentru pensiuni, restaurante, saloane, spălătorii auto, vulcanizări și clinici — cu un design la nivelul serviciilor pe care le oferi, gata în câteva zile.</p>
+      <div class="hero-actions" style="--d:5">
         <a href="contact.html" class="btn btn-primary">Cere o ofertă gratuită</a>
         <a href="portofoliu.html" class="btn btn-ghost">Vezi portofoliul</a>
       </div>
-      <div class="hero-stats">
+      <div class="hero-stats" style="--d:6">
         <div><strong>6+</strong><span>domenii acoperite</span></div>
         <div><strong>100%</strong><span>optimizat mobil</span></div>
         <div><strong>&lt; 7 zile</strong><span>de la brief la live</span></div>
@@ -65,126 +71,80 @@
     </div>
   </section>
 
-  <section class="hero-puzzle-section">
-    <!-- shared jigsaw silhouettes: each clipPath is defined once in objectBoundingBox
-         (0..1) fractions, so every piece rescales correctly at any viewport width -->
-    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-      <defs>
-        <clipPath id="jigsaw-p1" clipPathUnits="objectBoundingBox"><path d="M 0.025 0.04 L 0.335 0.04 L 0.335 0.226 C 0.3554 0.226, 0.403 0.2392, 0.403 0.27 C 0.403 0.3008, 0.3554 0.314, 0.335 0.314 L 0.335 0.5 L 0.224 0.5 C 0.224 0.5204, 0.2108 0.568, 0.18 0.568 C 0.1492 0.568, 0.136 0.5204, 0.136 0.5 L 0.025 0.5 L 0.025 0.04 Z"/></clipPath>
-        <clipPath id="jigsaw-p2" clipPathUnits="objectBoundingBox"><path d="M 0.335 0.04 L 0.667 0.04 L 0.667 0.226 C 0.6466 0.226, 0.599 0.2392, 0.599 0.27 C 0.599 0.3008, 0.6466 0.314, 0.667 0.314 L 0.667 0.5 L 0.545 0.5 C 0.545 0.4796, 0.5318 0.432, 0.501 0.432 C 0.4702 0.432, 0.457 0.4796, 0.457 0.5 L 0.335 0.5 L 0.335 0.314 C 0.3554 0.314, 0.403 0.3008, 0.403 0.27 C 0.403 0.2392, 0.3554 0.226, 0.335 0.226 L 0.335 0.04 Z"/></clipPath>
-        <clipPath id="jigsaw-p3" clipPathUnits="objectBoundingBox"><path d="M 0.667 0.04 L 0.975 0.04 L 0.975 0.5 L 0.865 0.5 C 0.865 0.5204, 0.8518 0.568, 0.821 0.568 C 0.7902 0.568, 0.777 0.5204, 0.777 0.5 L 0.667 0.5 L 0.667 0.314 C 0.6466 0.314, 0.599 0.3008, 0.599 0.27 C 0.599 0.2392, 0.6466 0.226, 0.667 0.226 L 0.667 0.04 Z"/></clipPath>
-        <clipPath id="jigsaw-p4" clipPathUnits="objectBoundingBox"><path d="M 0.025 0.5 L 0.136 0.5 C 0.136 0.5204, 0.1492 0.568, 0.18 0.568 C 0.2108 0.568, 0.224 0.5204, 0.224 0.5 L 0.335 0.5 L 0.335 0.686 C 0.3146 0.686, 0.267 0.6992, 0.267 0.73 C 0.267 0.7608, 0.3146 0.774, 0.335 0.774 L 0.335 0.96 L 0.335 0.96 L 0.025 0.96 Z"/></clipPath>
-        <clipPath id="jigsaw-p5" clipPathUnits="objectBoundingBox"><path d="M 0.335 0.5 L 0.457 0.5 C 0.457 0.4796, 0.4702 0.432, 0.501 0.432 C 0.5318 0.432, 0.545 0.4796, 0.545 0.5 L 0.667 0.5 L 0.667 0.686 C 0.6874 0.686, 0.735 0.6992, 0.735 0.73 C 0.735 0.7608, 0.6874 0.774, 0.667 0.774 L 0.667 0.96 L 0.667 0.96 L 0.335 0.96 L 0.335 0.774 C 0.3146 0.774, 0.267 0.7608, 0.267 0.73 C 0.267 0.6992, 0.3146 0.686, 0.335 0.686 L 0.335 0.5 Z"/></clipPath>
-        <clipPath id="jigsaw-p6" clipPathUnits="objectBoundingBox"><path d="M 0.667 0.5 L 0.777 0.5 C 0.777 0.5204, 0.7902 0.568, 0.821 0.568 C 0.8518 0.568, 0.865 0.5204, 0.865 0.5 L 0.975 0.5 L 0.975 0.5 L 0.975 0.96 L 0.667 0.96 L 0.667 0.774 C 0.6874 0.774, 0.735 0.7608, 0.735 0.73 C 0.735 0.6992, 0.6874 0.686, 0.667 0.686 L 0.667 0.5 Z"/></clipPath>
-      </defs>
-    </svg>
-
-    <div class="hero-puzzle" data-puzzle>
-      <article class="puzzle-piece jp-1" tabindex="0" role="button"
-        data-video="media/video-pensiune.mp4" data-tag-class="tag-teal"
-        data-tag="Cazare & turism" data-title="Pensiune"
-        data-desc="Galerie foto/video cu camerele și zona din jur, activități, rezervare rapidă și hartă interactivă.">
-        <video muted loop playsinline autoplay preload="auto"><source src="media/video-pensiune.mp4" type="video/mp4"></video>
-        <div class="puzzle-caption">
-          <span class="puzzle-tag tag-teal">Cazare & turism</span>
-          <h3>Pensiune</h3>
-        </div>
-        <span class="tap-hint" aria-hidden="true">+</span>
-      </article>
-      <article class="puzzle-piece jp-2" tabindex="0" role="button"
-        data-video="media/video-restaurant.mp4" data-tag-class="tag-orange"
-        data-tag="Restaurant & local" data-title="Restaurant"
-        data-desc="Poze care fac poftă, meniu clar, rezervare și comandă dintr-un click.">
-        <video muted loop playsinline autoplay preload="auto"><source src="media/video-restaurant.mp4" type="video/mp4"></video>
-        <div class="puzzle-caption">
-          <span class="puzzle-tag tag-orange">Restaurant & local</span>
-          <h3>Restaurant</h3>
-        </div>
-        <span class="tap-hint" aria-hidden="true">+</span>
-      </article>
-      <article class="puzzle-piece jp-3" tabindex="0" role="button"
-        data-video="media/video-cosmetica.mp4" data-tag-class="tag-yellow"
-        data-tag="Beauty" data-title="Cosmetică"
-        data-desc="Lucrările tale puse în valoare, prețuri clare, programare rapidă, non-stop.">
-        <video muted loop playsinline autoplay preload="auto"><source src="media/video-cosmetica.mp4" type="video/mp4"></video>
-        <div class="puzzle-caption">
-          <span class="puzzle-tag tag-yellow">Beauty</span>
-          <h3>Cosmetică</h3>
-        </div>
-        <span class="tap-hint" aria-hidden="true">+</span>
-      </article>
-      <article class="puzzle-piece jp-4" tabindex="0" role="button"
-        data-video="media/video-spalatorie.mp4" data-tag-class="tag-teal"
-        data-tag="Car wash" data-title="Spălătorie auto"
-        data-desc="Prețuri și program clare din prima privire — clientul decide din mers.">
-        <video muted loop playsinline autoplay preload="auto"><source src="media/video-spalatorie.mp4" type="video/mp4"></video>
-        <div class="puzzle-caption">
-          <span class="puzzle-tag tag-teal">Car wash</span>
-          <h3>Spălătorie auto</h3>
-        </div>
-        <span class="tap-hint" aria-hidden="true">+</span>
-      </article>
-      <article class="puzzle-piece jp-5" tabindex="0" role="button"
-        data-video="media/video-vulcanizare.mp4" data-tag-class="tag-orange"
-        data-tag="Service & vulcanizare" data-title="Vulcanizare"
-        data-desc="Stoc de anvelope la vedere, programare rapidă pentru urgențe, încredere din prima privire.">
-        <video muted loop playsinline autoplay preload="auto"><source src="media/video-vulcanizare.mp4" type="video/mp4"></video>
-        <div class="puzzle-caption">
-          <span class="puzzle-tag tag-orange">Service & vulcanizare</span>
-          <h3>Vulcanizare</h3>
-        </div>
-        <span class="tap-hint" aria-hidden="true">+</span>
-      </article>
-      <article class="puzzle-piece jp-6" tabindex="0" role="button"
-        data-video="media/video-stomatologie.mp4" data-tag-class="tag-yellow"
-        data-tag="Clinică stomatologică" data-title="Stomatologie"
-        data-desc="Un site care liniștește pacienții din prima secundă, programare simplă, fără stres.">
-        <video muted loop playsinline autoplay preload="auto"><source src="media/video-stomatologie.mp4" type="video/mp4"></video>
-        <div class="puzzle-caption">
-          <span class="puzzle-tag tag-yellow">Clinică stomatologică</span>
-          <h3>Stomatologie</h3>
-        </div>
-        <span class="tap-hint" aria-hidden="true">+</span>
-      </article>
-
-      <!-- draws the interlocking seams on top of the pieces, tracing the
-           exact same curves used to cut them -->
-      <svg class="jigsaw-seams" viewBox="0 0 1 1" preserveAspectRatio="none" aria-hidden="true">
-        <path class="seam-outer" d="M 0.025 0.04 L 0.975 0.04 L 0.975 0.96 L 0.025 0.96 Z"/>
-        <path d="M 0.335 0.04 L 0.335 0.226 C 0.3554 0.226, 0.403 0.2392, 0.403 0.27 C 0.403 0.3008, 0.3554 0.314, 0.335 0.314 L 0.335 0.5"/>
-        <path d="M 0.667 0.04 L 0.667 0.226 C 0.6466 0.226, 0.599 0.2392, 0.599 0.27 C 0.599 0.3008, 0.6466 0.314, 0.667 0.314 L 0.667 0.5"/>
-        <path d="M 0.335 0.5 L 0.335 0.686 C 0.3146 0.686, 0.267 0.6992, 0.267 0.73 C 0.267 0.7608, 0.3146 0.774, 0.335 0.774 L 0.335 0.96"/>
-        <path d="M 0.667 0.5 L 0.667 0.686 C 0.6874 0.686, 0.735 0.6992, 0.735 0.73 C 0.735 0.7608, 0.6874 0.774, 0.667 0.774 L 0.667 0.96"/>
-        <path d="M 0.025 0.5 L 0.136 0.5 C 0.136 0.5204, 0.1492 0.568, 0.18 0.568 C 0.2108 0.568, 0.224 0.5204, 0.224 0.5 L 0.335 0.5"/>
-        <path d="M 0.335 0.5 L 0.457 0.5 C 0.457 0.4796, 0.4702 0.432, 0.501 0.432 C 0.5318 0.432, 0.545 0.4796, 0.545 0.5 L 0.667 0.5"/>
-        <path d="M 0.667 0.5 L 0.777 0.5 C 0.777 0.5204, 0.7902 0.568, 0.821 0.568 C 0.8518 0.568, 0.865 0.5204, 0.865 0.5 L 0.975 0.5"/>
-      </svg>
+  <section class="reel-section">
+    <div class="container reel-ticks" aria-hidden="true"></div>
+    <div class="reel-viewport">
+      <div class="reel-track" data-reel>
+        <article class="reel-tile" tabindex="0" role="button" data-video="media/video-pensiune.mp4" data-tag="Cazare & turism" data-title="Pensiune" data-desc="Galerie foto/video cu camerele și zona din jur, activități, rezervare rapidă și hartă interactivă.">
+          <video muted loop playsinline preload="none"><source src="media/video-pensiune.mp4" type="video/mp4"></video>
+          <div class="reel-tile-label"><span class="reel-tile-tag">Cazare & turism</span><h3>Pensiune</h3></div>
+        </article>
+        <article class="reel-tile" tabindex="0" role="button" data-video="media/video-restaurant.mp4" data-tag="Restaurant & local" data-title="Restaurant" data-desc="Poze care fac poftă, meniu clar, rezervare și comandă dintr-un click.">
+          <video muted loop playsinline preload="none"><source src="media/video-restaurant.mp4" type="video/mp4"></video>
+          <div class="reel-tile-label"><span class="reel-tile-tag">Restaurant & local</span><h3>Restaurant</h3></div>
+        </article>
+        <article class="reel-tile" tabindex="0" role="button" data-video="media/video-cosmetica.mp4" data-tag="Beauty" data-title="Cosmetică" data-desc="Lucrările tale puse în valoare, prețuri clare, programare rapidă, non-stop.">
+          <video muted loop playsinline preload="none"><source src="media/video-cosmetica.mp4" type="video/mp4"></video>
+          <div class="reel-tile-label"><span class="reel-tile-tag">Beauty</span><h3>Cosmetică</h3></div>
+        </article>
+        <article class="reel-tile" tabindex="0" role="button" data-video="media/video-spalatorie.mp4" data-tag="Car wash" data-title="Spălătorie auto" data-desc="Prețuri și program clare din prima privire — clientul decide din mers.">
+          <video muted loop playsinline preload="none"><source src="media/video-spalatorie.mp4" type="video/mp4"></video>
+          <div class="reel-tile-label"><span class="reel-tile-tag">Car wash</span><h3>Spălătorie auto</h3></div>
+        </article>
+        <article class="reel-tile" tabindex="0" role="button" data-video="media/video-vulcanizare.mp4" data-tag="Service & vulcanizare" data-title="Vulcanizare" data-desc="Stoc de anvelope la vedere, programare rapidă pentru urgențe, încredere din prima privire.">
+          <video muted loop playsinline preload="none"><source src="media/video-vulcanizare.mp4" type="video/mp4"></video>
+          <div class="reel-tile-label"><span class="reel-tile-tag">Service & vulcanizare</span><h3>Vulcanizare</h3></div>
+        </article>
+        <article class="reel-tile" tabindex="0" role="button" data-video="media/video-stomatologie.mp4" data-tag="Clinică stomatologică" data-title="Stomatologie" data-desc="Un site care liniștește pacienții din prima secundă, programare simplă, fără stres.">
+          <video muted loop playsinline preload="none"><source src="media/video-stomatologie.mp4" type="video/mp4"></video>
+          <div class="reel-tile-label"><span class="reel-tile-tag">Clinică stomatologică</span><h3>Stomatologie</h3></div>
+        </article>
+        <!-- set duplicat, pentru buclă continuă fără sudură -->
+        <article class="reel-tile" aria-hidden="true" tabindex="-1" data-video="media/video-pensiune.mp4" data-tag="Cazare & turism" data-title="Pensiune" data-desc="Galerie foto/video cu camerele și zona din jur, activități, rezervare rapidă și hartă interactivă.">
+          <video muted loop playsinline preload="none"><source src="media/video-pensiune.mp4" type="video/mp4"></video>
+          <div class="reel-tile-label"><span class="reel-tile-tag">Cazare & turism</span><h3>Pensiune</h3></div>
+        </article>
+        <article class="reel-tile" aria-hidden="true" tabindex="-1" data-video="media/video-restaurant.mp4" data-tag="Restaurant & local" data-title="Restaurant" data-desc="Poze care fac poftă, meniu clar, rezervare și comandă dintr-un click.">
+          <video muted loop playsinline preload="none"><source src="media/video-restaurant.mp4" type="video/mp4"></video>
+          <div class="reel-tile-label"><span class="reel-tile-tag">Restaurant & local</span><h3>Restaurant</h3></div>
+        </article>
+        <article class="reel-tile" aria-hidden="true" tabindex="-1" data-video="media/video-cosmetica.mp4" data-tag="Beauty" data-title="Cosmetică" data-desc="Lucrările tale puse în valoare, prețuri clare, programare rapidă, non-stop.">
+          <video muted loop playsinline preload="none"><source src="media/video-cosmetica.mp4" type="video/mp4"></video>
+          <div class="reel-tile-label"><span class="reel-tile-tag">Beauty</span><h3>Cosmetică</h3></div>
+        </article>
+        <article class="reel-tile" aria-hidden="true" tabindex="-1" data-video="media/video-spalatorie.mp4" data-tag="Car wash" data-title="Spălătorie auto" data-desc="Prețuri și program clare din prima privire — clientul decide din mers.">
+          <video muted loop playsinline preload="none"><source src="media/video-spalatorie.mp4" type="video/mp4"></video>
+          <div class="reel-tile-label"><span class="reel-tile-tag">Car wash</span><h3>Spălătorie auto</h3></div>
+        </article>
+        <article class="reel-tile" aria-hidden="true" tabindex="-1" data-video="media/video-vulcanizare.mp4" data-tag="Service & vulcanizare" data-title="Vulcanizare" data-desc="Stoc de anvelope la vedere, programare rapidă pentru urgențe, încredere din prima privire.">
+          <video muted loop playsinline preload="none"><source src="media/video-vulcanizare.mp4" type="video/mp4"></video>
+          <div class="reel-tile-label"><span class="reel-tile-tag">Service & vulcanizare</span><h3>Vulcanizare</h3></div>
+        </article>
+        <article class="reel-tile" aria-hidden="true" tabindex="-1" data-video="media/video-stomatologie.mp4" data-tag="Clinică stomatologică" data-title="Stomatologie" data-desc="Un site care liniștește pacienții din prima secundă, programare simplă, fără stres.">
+          <video muted loop playsinline preload="none"><source src="media/video-stomatologie.mp4" type="video/mp4"></video>
+          <div class="reel-tile-label"><span class="reel-tile-tag">Clinică stomatologică</span><h3>Stomatologie</h3></div>
+        </article>
+      </div>
     </div>
+    <div class="container reel-ticks" aria-hidden="true" style="margin-top:18px;"></div>
 
-    <!-- opens when a piece is tapped/clicked: bigger video + full details -->
-    <div class="puzzle-modal" data-puzzle-modal hidden>
-      <div class="puzzle-modal-backdrop" data-puzzle-modal-close></div>
-      <div class="puzzle-modal-card" role="dialog" aria-modal="true" aria-labelledby="puzzle-modal-title">
-        <button class="puzzle-modal-close" data-puzzle-modal-close aria-label="Închide">&times;</button>
-        <div class="puzzle-modal-media">
-          <video muted loop playsinline autoplay data-puzzle-modal-video></video>
+    <!-- opens when a piesă is tapped/clicked: bigger video + full details -->
+    <div class="reel-modal" data-reel-modal hidden>
+      <div class="reel-modal-backdrop" data-reel-modal-close></div>
+      <div class="reel-modal-card" role="dialog" aria-modal="true" aria-labelledby="reel-modal-title">
+        <button class="reel-modal-close" data-reel-modal-close aria-label="Închide">&times;</button>
+        <div class="reel-modal-media">
+          <video muted loop playsinline autoplay data-reel-modal-video></video>
         </div>
-        <div class="puzzle-modal-body">
-          <span class="puzzle-tag" data-puzzle-modal-tag></span>
-          <h3 id="puzzle-modal-title" data-puzzle-modal-title></h3>
-          <p data-puzzle-modal-desc></p>
+        <div class="reel-modal-body">
+          <span class="reel-tile-tag" data-reel-modal-tag></span>
+          <h3 id="reel-modal-title" data-reel-modal-title></h3>
+          <p data-reel-modal-desc></p>
           <a href="contact.html" class="btn btn-primary">Cere o ofertă pentru acest domeniu</a>
         </div>
       </div>
     </div>
   </section>
-
-  <div class="marquee">
-    <div class="marquee-track">
-      <span>Pensiuni</span><span>Restaurante</span><span>Saloane de înfrumusețare</span><span>Spălătorii auto</span><span>Vulcanizări</span><span>Clinici stomatologice</span>
-      <span>Pensiuni</span><span>Restaurante</span><span>Saloane de înfrumusețare</span><span>Spălătorii auto</span><span>Vulcanizări</span><span>Clinici stomatologice</span>
-    </div>
-  </div>
 
   <section class="section-alt">
     <div class="container">
