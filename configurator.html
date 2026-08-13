@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="ro" data-theme="noir">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Configurator pachet — ACCsite</title>
+<meta name="description" content="Construiește-ți pachetul de site pas cu pas: pagini, calendar, video, poze și extra opționale — primești un preț estimativ pe loc.">
+<link rel="canonical" href="https://acorivasi.github.io/ACCsite/configurator.html">
+<meta name="theme-color" content="#0a0a0b">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 72 72'%3E%3Crect width='72' height='72' rx='18' fill='%230a0a0b'/%3E%3Cg stroke='%232bb3ad' stroke-width='5' stroke-linecap='round' fill='none'%3E%3Cpath d='M20 30 V20 H30'/%3E%3Cpath d='M52 30 V20 H42'/%3E%3Cpath d='M20 42 V52 H30'/%3E%3Cpath d='M52 42 V52 H42'/%3E%3C/g%3E%3Ccircle cx='36' cy='36' r='7' fill='%23e14a3d'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,450;0,9..144,500;1,9..144,500&family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="index.html" class="logo">ACC<span class="site-word"><span class="sr-only">site</span><span aria-hidden="true">s<span class="i-mark-wrap"><svg class="i-mark" viewBox="0 0 24 24"><g stroke="#2bb3ad" stroke-width="2.6" stroke-linecap="round" fill="none"><path d="M4 9 V4 H9"/><path d="M20 9 V4 H15"/><path d="M4 15 V20 H9"/><path d="M20 15 V20 H15"/></g><circle cx="12" cy="12" r="3" fill="#e14a3d"/></svg>ı</span>te</span></span></a>
+    <nav class="main-nav">
+      <span class="nav-pill" data-nav-pill aria-hidden="true"></span>
+      <a href="index.html">Acasă</a>
+      <a href="despre.html">Despre noi</a>
+      <a href="portofoliu.html">Portofoliu</a>
+      <a href="configurator.html" class="active">Configurator</a>
+      <a href="contact.html">Contact</a>
+      <a href="contact.html" class="btn btn-primary main-nav-cta">Hai să discutăm</a>
+    </nav>
+    <div class="header-cta">
+      <button class="theme-toggle" data-theme-toggle type="button" aria-pressed="false" aria-label="Comută tema între Noir și Smarald">
+        <span class="theme-toggle-track"><span class="theme-toggle-thumb"></span></span>
+        <span class="theme-toggle-label">Comută tema</span>
+      </button>
+      <a href="contact.html" class="btn btn-primary">Hai să discutăm</a>
+      <button class="nav-toggle" aria-label="Deschide meniul" aria-expanded="false"><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow">Configurator</span>
+      <h1>Construiește-ți pachetul, pas cu pas</h1>
+      <p>Alege ce ai nevoie pentru afacerea ta — vezi prețul estimativ actualizat pe loc și trimite-ne selecția ta într-un click.</p>
+      <span class="config-category-banner" data-config-category-banner hidden>Pachet pentru: <strong data-config-category-value></strong></span>
+    </div>
+  </section>
+
+  <section>
+    <div class="container configurator">
+      <form class="configurator-form" data-config-form>
+
+        <div class="config-group">
+          <h2 class="config-group-title">1. Câte pagini are site-ul?</h2>
+          <div class="config-options">
+            <label class="config-option">
+              <input type="radio" name="pagini" data-price="890">
+              <span class="config-option-body">
+                <strong>1 pagină</strong>
+                <span class="config-option-desc">Prezentare simplă, tot ce contează pe o singură pagină</span>
+                <span class="config-option-price">890 RON</span>
+              </span>
+            </label>
+            <label class="config-option">
+              <input type="radio" name="pagini" data-price="1290" checked>
+              <span class="config-option-body">
+                <strong>3 pagini</strong>
+                <span class="config-option-desc">Acasă, Despre, Contact — cea mai cerută variantă</span>
+                <span class="config-option-price">1.290 RON</span>
+              </span>
+            </label>
+            <label class="config-option">
+              <input type="radio" name="pagini" data-price="1790">
+              <span class="config-option-body">
+                <strong>5+ pagini</strong>
+                <span class="config-option-desc">Portofoliu extins, servicii separate, blog etc.</span>
+                <span class="config-option-price">1.790 RON</span>
+              </span>
+            </label>
+          </div>
+        </div>
+
+        <div class="config-group">
+          <h2 class="config-group-title">2. Calendar / programări online?</h2>
+          <div class="config-options">
+            <label class="config-option">
+              <input type="checkbox" data-price="250" data-label="Programări online">
+              <span class="config-option-body">
+                <strong>Vreau programări online</strong>
+                <span class="config-option-desc">Clienții își rezervă direct din site un loc sau o oră</span>
+                <span class="config-option-price">+250 RON</span>
+              </span>
+            </label>
+          </div>
+        </div>
+
+        <div class="config-group">
+          <h2 class="config-group-title">3. Câte clipuri video în galerie?</h2>
+          <div class="config-stepper" data-config-stepper data-price-per="60" data-min="0" data-max="6" data-label="Clipuri video">
+            <button type="button" class="stepper-btn" data-step="-1" aria-label="Mai puține clipuri">–</button>
+            <span class="stepper-value" data-stepper-value>0</span>
+            <button type="button" class="stepper-btn" data-step="1" aria-label="Mai multe clipuri">+</button>
+            <span class="config-option-desc">60 RON / clip montat</span>
+          </div>
+        </div>
+
+        <div class="config-group">
+          <h2 class="config-group-title">4. Câte poze în galerie?</h2>
+          <div class="config-options">
+            <label class="config-option">
+              <input type="radio" name="poze" data-price="0" data-label="Până în 5 poze" checked>
+              <span class="config-option-body">
+                <strong>Până în 5 poze</strong>
+                <span class="config-option-price">inclus</span>
+              </span>
+            </label>
+            <label class="config-option">
+              <input type="radio" name="poze" data-price="90" data-label="10 poze">
+              <span class="config-option-body">
+                <strong>10 poze</strong>
+                <span class="config-option-price">+90 RON</span>
+              </span>
+            </label>
+            <label class="config-option">
+              <input type="radio" name="poze" data-price="180" data-label="20+ poze">
+              <span class="config-option-body">
+                <strong>20+ poze</strong>
+                <span class="config-option-price">+180 RON</span>
+              </span>
+            </label>
+          </div>
+        </div>
+
+        <div class="config-group">
+          <h2 class="config-group-title">5. Extra opțional</h2>
+          <div class="config-options">
+            <label class="config-option">
+              <input type="checkbox" data-price="200" data-label="SEO de bază">
+              <span class="config-option-body">
+                <strong>SEO de bază</strong>
+                <span class="config-option-desc">Structură și meta-taguri optimizate pentru Google</span>
+                <span class="config-option-price">+200 RON</span>
+              </span>
+            </label>
+            <label class="config-option">
+              <input type="checkbox" data-price="250" data-label="Limbi multiple (RO + EN)">
+              <span class="config-option-body">
+                <strong>Limbi multiple (RO + EN)</strong>
+                <span class="config-option-desc">Site disponibil și în engleză</span>
+                <span class="config-option-price">+250 RON</span>
+              </span>
+            </label>
+            <label class="config-option">
+              <input type="checkbox" data-price="150" data-label="Formular avansat">
+              <span class="config-option-body">
+                <strong>Formular avansat</strong>
+                <span class="config-option-desc">Validare, fișiere atașate, notificări pe email</span>
+                <span class="config-option-price">+150 RON</span>
+              </span>
+            </label>
+            <label class="config-option">
+              <input type="checkbox" data-price-monthly="80" data-label="Mentenanță lunară">
+              <span class="config-option-body">
+                <strong>Mentenanță lunară</strong>
+                <span class="config-option-desc">Actualizări și mici modificări, oricând ai nevoie</span>
+                <span class="config-option-price">80 RON/lună</span>
+              </span>
+            </label>
+          </div>
+        </div>
+
+      </form>
+
+      <aside class="config-summary" data-config-summary>
+        <h3>Pachetul tău</h3>
+        <ul class="config-summary-list" data-config-summary-list></ul>
+        <div class="config-summary-total">
+          <span>Total estimativ</span>
+          <strong data-config-total>0 RON</strong>
+        </div>
+        <div class="config-summary-monthly" data-config-monthly hidden>
+          <span>+ mentenanță</span>
+          <strong data-config-monthly-value>0 RON/lună</strong>
+        </div>
+        <p class="config-summary-note">Preț orientativ — confirmăm exact după ce discutăm despre afacerea ta, fără costuri ascunse.</p>
+        <div class="config-summary-actions">
+          <a href="#" class="btn btn-primary btn-block" data-config-whatsapp target="_blank" rel="noopener">Trimite pe WhatsApp</a>
+          <a href="#" class="btn btn-ghost btn-block" data-config-contact>Trimite prin formular</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a href="index.html" class="logo">ACC<span class="site-word"><span class="sr-only">site</span><span aria-hidden="true">s<span class="i-mark-wrap"><svg class="i-mark" viewBox="0 0 24 24"><g stroke="#2bb3ad" stroke-width="2.6" stroke-linecap="round" fill="none"><path d="M4 9 V4 H9"/><path d="M20 9 V4 H15"/><path d="M4 15 V20 H9"/><path d="M20 15 V20 H15"/></g><circle cx="12" cy="12" r="3" fill="#e14a3d"/></svg>ı</span>te</span></span></a>
+        <p style="margin-top:14px; max-width:38ch;">Website-uri de prezentare pentru afaceri locale de calitate — rafinate, rapide și ușor de administrat.</p>
+      </div>
+      <div>
+        <h4>Navigare</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Acasă</a></li>
+          <li><a href="despre.html">Despre noi</a></li>
+          <li><a href="portofoliu.html">Portofoliu</a></li>
+          <li><a href="configurator.html">Configurator</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul class="footer-links">
+          <li><a href="https://wa.me/40727731227" target="_blank" rel="noopener">WhatsApp</a></li>
+          <li><a href="mailto:accsite@gmail.com">accsite@gmail.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 ACCsite. Toate drepturile rezervate.</span>
+      <span>Făcut cu grijă pentru afaceri locale.</span>
+    </div>
+  </div>
+</footer>
+
+<a href="https://wa.me/40727731227?text=Bună!%20Aș%20vrea%20un%20site%20pentru%20afacerea%20mea." class="wa-float" target="_blank" rel="noopener" aria-label="Scrie-ne pe WhatsApp">💬</a>
+
+<script src="js/main.js"></script>
+</body>
+</html>
