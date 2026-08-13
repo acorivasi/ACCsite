@@ -191,8 +191,8 @@ function initReelModal() {
   }
 
   tiles.forEach((tile) => {
-    if (tile.hasAttribute("aria-hidden")) return;
     tile.addEventListener("click", () => open(tile));
+    if (tile.hasAttribute("aria-hidden")) return;
     tile.addEventListener("keydown", (e) => {
       if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
