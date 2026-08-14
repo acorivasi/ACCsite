@@ -1262,3 +1262,4 @@ form.contact-form { display: flex; flex-direction: column; gap: 16px; }
 }
 .config-summary-note { font-size: 0.82rem; color: var(--color-text-light); margin: 14px 0 0; }
 .config-summary-actions { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+.config-summary-actions .btn.is-disabled { opacity: 0.4; pointer-events: none; box-shadow: none; }
