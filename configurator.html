@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Configurator pachet — ACCsite</title>
-<meta name="description" content="Construiește-ți pachetul de site pas cu pas: pagini, calendar, video, poze și extra opționale — primești un preț estimativ pe loc.">
+<meta name="description" content="Alege pachetul de site potrivit afacerii tale — START, BASIC, BUSINESS sau PREMIUM — și vezi pe loc ce include și cât costă.">
 <link rel="canonical" href="https://acorivasi.github.io/ACCsite/configurator.html">
 <meta name="theme-color" content="#0a0a0b">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 72 72'%3E%3Crect width='72' height='72' rx='18' fill='%230a0a0b'/%3E%3Cg stroke='%232bb3ad' stroke-width='5' stroke-linecap='round' fill='none'%3E%3Cpath d='M20 30 V20 H30'/%3E%3Cpath d='M52 30 V20 H42'/%3E%3Cpath d='M20 42 V52 H30'/%3E%3Cpath d='M52 42 V52 H42'/%3E%3C/g%3E%3Ccircle cx='36' cy='36' r='7' fill='%23e14a3d'/%3E%3C/svg%3E">
@@ -43,8 +43,8 @@
   <section class="page-hero">
     <div class="container">
       <span class="eyebrow">Configurator</span>
-      <h1>Construiește-ți pachetul, pas cu pas</h1>
-      <p>Alege ce ai nevoie pentru afacerea ta — vezi prețul estimativ actualizat pe loc și trimite-ne selecția ta într-un click.</p>
+      <h1>Alege pachetul potrivit pentru afacerea ta</h1>
+      <p>Patru pachete clare, cu tot ce include fiecare — plus servicii opționale, dacă ai nevoie de mai mult. Vezi rezumatul actualizat pe loc și trimite-ni-l într-un click.</p>
       <span class="config-category-banner" data-config-category-banner hidden>Pachet pentru: <strong data-config-category-value></strong></span>
     </div>
   </section>
@@ -54,119 +54,165 @@
       <form class="configurator-form" data-config-form>
 
         <div class="config-group">
-          <h2 class="config-group-title">1. Câte pagini are site-ul?</h2>
+          <h2 class="config-group-title">1. Alege pachetul de bază</h2>
+          <div class="config-options config-packages">
+
+            <label class="config-option config-package">
+              <input type="radio" name="pachet" value="start" data-price="199" data-label="Pachet START">
+              <span class="config-option-body">
+                <span class="config-package-name">START</span>
+                <span class="config-option-price config-package-price">199 €</span>
+                <span class="config-option-desc">1–3 pagini</span>
+                <ul class="config-package-features">
+                  <li>1–3 pagini de prezentare (Acasă, Servicii, Contact)</li>
+                  <li>Design adaptat pentru mobil</li>
+                  <li>Buton de apel și WhatsApp direct din site</li>
+                  <li>Locație afișată pe Google Maps</li>
+                  <li>1 rundă de modificări incluse după livrare</li>
+                </ul>
+              </span>
+            </label>
+
+            <label class="config-option config-package">
+              <span class="config-package-badge">Cel mai ales</span>
+              <input type="radio" name="pachet" value="basic" data-price="349" data-label="Pachet BASIC" checked>
+              <span class="config-option-body">
+                <span class="config-package-name">BASIC</span>
+                <span class="config-option-price config-package-price">349 €</span>
+                <span class="config-option-desc">3–5 pagini</span>
+                <ul class="config-package-features">
+                  <li>3–5 pagini (Acasă, Servicii, Despre, Galerie, Contact)</li>
+                  <li>Design adaptat pentru mobil</li>
+                  <li>Galerie foto (până la 15 imagini)</li>
+                  <li>Buton de apel și WhatsApp direct din site</li>
+                  <li>Locație afișată pe Google Maps</li>
+                  <li>1 rundă de modificări incluse după livrare</li>
+                </ul>
+              </span>
+            </label>
+
+            <label class="config-option config-package">
+              <input type="radio" name="pachet" value="business" data-price="499" data-label="Pachet BUSINESS">
+              <span class="config-option-body">
+                <span class="config-package-name">BUSINESS</span>
+                <span class="config-option-price config-package-price">499 €</span>
+                <span class="config-option-desc">Pagini nelimitate</span>
+                <ul class="config-package-features">
+                  <li>Pagini nelimitate, structurate după nevoile afacerii</li>
+                  <li>Design adaptat pentru mobil</li>
+                  <li>Galerie foto extinsă</li>
+                  <li>Formular de contact + buton de apel și WhatsApp</li>
+                  <li>Locație afișată pe Google Maps</li>
+                  <li>1 rundă de modificări incluse după livrare</li>
+                </ul>
+              </span>
+            </label>
+
+            <label class="config-option config-package">
+              <span class="config-package-badge config-package-badge-premium">Mai multe funcționalități</span>
+              <input type="radio" name="pachet" value="premium" data-price="999" data-label="Pachet PREMIUM">
+              <span class="config-option-body">
+                <span class="config-package-name">PREMIUM</span>
+                <span class="config-option-price config-package-price">999 €</span>
+                <span class="config-option-desc">Site complet + funcționalități avansate</span>
+                <ul class="config-package-features">
+                  <li>Pagini nelimitate, design premium</li>
+                  <li>Galerie foto & video extinsă</li>
+                  <li>Programări/rezervări online integrate</li>
+                  <li>Website în 2 limbi (RO + EN)</li>
+                  <li>Formular de contact + buton de apel și WhatsApp</li>
+                  <li>SEO avansat pentru Google</li>
+                  <li>Locație afișată pe Google Maps</li>
+                  <li>3 luni de mentenanță Business incluse</li>
+                  <li>2 runde de modificări incluse după livrare</li>
+                </ul>
+              </span>
+            </label>
+
+          </div>
+        </div>
+
+        <div class="config-group">
+          <h2 class="config-group-title">2. Servicii opționale <span class="config-group-subtitle">(cost stabilit separat, comunicat înainte de a începe)</span></h2>
           <div class="config-options">
             <label class="config-option">
-              <input type="radio" name="pagini" data-price="890">
+              <input type="checkbox" data-quote="true" data-label="Fotografie/videografie profesională">
               <span class="config-option-body">
-                <strong>1 pagină</strong>
-                <span class="config-option-desc">Prezentare simplă, tot ce contează pe o singură pagină</span>
-                <span class="config-option-price">890 RON</span>
+                <strong>Fotografie & video profesională</strong>
+                <span class="config-option-desc">Ședință foto/video pentru afacerea ta, cu un profesionist</span>
+                <span class="config-option-price">cost la cerere</span>
+              </span>
+            </label>
+            <label class="config-option" data-package-note>
+              <input type="checkbox" data-quote="true" data-label="Programări/rezervări online" data-included-by="premium">
+              <span class="config-option-body">
+                <strong>Programări / rezervări online</strong>
+                <span class="config-option-desc">Clienții rezervă direct din site o oră sau o masă</span>
+                <span class="config-option-price">cost la cerere</span>
+                <span class="config-option-included-note">Inclus deja în pachetul PREMIUM</span>
               </span>
             </label>
             <label class="config-option">
-              <input type="radio" name="pagini" data-price="1290" checked>
+              <input type="checkbox" data-quote="true" data-label="Magazin online">
               <span class="config-option-body">
-                <strong>3 pagini</strong>
-                <span class="config-option-desc">Acasă, Despre, Contact — cea mai cerută variantă</span>
-                <span class="config-option-price">1.290 RON</span>
+                <strong>Magazin online</strong>
+                <span class="config-option-desc">Vânzare de produse direct din site, cu plată online</span>
+                <span class="config-option-price">cost la cerere</span>
+              </span>
+            </label>
+            <label class="config-option" data-package-note>
+              <input type="checkbox" data-quote="true" data-label="Website în mai multe limbi" data-included-by="premium">
+              <span class="config-option-body">
+                <strong>Website în mai multe limbi</strong>
+                <span class="config-option-desc">Util pentru clienți străini (pensiuni, restaurante etc.)</span>
+                <span class="config-option-price">cost la cerere</span>
+                <span class="config-option-included-note">Inclus deja în pachetul PREMIUM</span>
               </span>
             </label>
             <label class="config-option">
-              <input type="radio" name="pagini" data-price="1790">
+              <input type="checkbox" data-quote="true" data-label="Chat live / chatbot">
               <span class="config-option-body">
-                <strong>5+ pagini</strong>
-                <span class="config-option-desc">Portofoliu extins, servicii separate, blog etc.</span>
-                <span class="config-option-price">1.790 RON</span>
+                <strong>Chat live sau chatbot</strong>
+                <span class="config-option-desc">Răspunsuri rapide la întrebările clienților, direct pe site</span>
+                <span class="config-option-price">cost la cerere</span>
+              </span>
+            </label>
+            <label class="config-option">
+              <input type="checkbox" data-quote="true" data-label="Newsletter / colectare contacte">
+              <span class="config-option-body">
+                <strong>Newsletter / colectare contacte</strong>
+                <span class="config-option-desc">Formular de abonare pentru oferte și noutăți pe email</span>
+                <span class="config-option-price">cost la cerere</span>
               </span>
             </label>
           </div>
         </div>
 
         <div class="config-group">
-          <h2 class="config-group-title">2. Calendar / programări online?</h2>
+          <h2 class="config-group-title">3. Mentenanță lunară <span class="config-group-subtitle">(opțional, se poate activa sau opri oricând)</span></h2>
           <div class="config-options">
             <label class="config-option">
-              <input type="checkbox" data-price="250" data-label="Programări online">
+              <input type="radio" name="mentenanta" checked>
               <span class="config-option-body">
-                <strong>Vreau programări online</strong>
-                <span class="config-option-desc">Clienții își rezervă direct din site un loc sau o oră</span>
-                <span class="config-option-price">+250 RON</span>
-              </span>
-            </label>
-          </div>
-        </div>
-
-        <div class="config-group">
-          <h2 class="config-group-title">3. Câte clipuri video în galerie?</h2>
-          <div class="config-stepper" data-config-stepper data-price-per="60" data-min="0" data-max="6" data-label="Clipuri video">
-            <button type="button" class="stepper-btn" data-step="-1" aria-label="Mai puține clipuri">–</button>
-            <span class="stepper-value" data-stepper-value>0</span>
-            <button type="button" class="stepper-btn" data-step="1" aria-label="Mai multe clipuri">+</button>
-            <span class="config-option-desc">60 RON / clip montat</span>
-          </div>
-        </div>
-
-        <div class="config-group">
-          <h2 class="config-group-title">4. Câte poze în galerie?</h2>
-          <div class="config-options">
-            <label class="config-option">
-              <input type="radio" name="poze" data-price="0" data-label="Până în 5 poze" checked>
-              <span class="config-option-body">
-                <strong>Până în 5 poze</strong>
-                <span class="config-option-price">inclus</span>
+                <strong>Fără mentenanță</strong>
+                <span class="config-option-desc">Te ocupi singur de modificări, sau ne scrii punctual</span>
+                <span class="config-option-price">—</span>
               </span>
             </label>
             <label class="config-option">
-              <input type="radio" name="poze" data-price="90" data-label="10 poze">
+              <input type="radio" name="mentenanta" data-price-monthly="25" data-label="Mentenanță Basic">
               <span class="config-option-body">
-                <strong>10 poze</strong>
-                <span class="config-option-price">+90 RON</span>
+                <strong>Basic</strong>
+                <span class="config-option-desc">Până la 1 oră de modificări de conținut pe lună</span>
+                <span class="config-option-price">25 €/lună</span>
               </span>
             </label>
             <label class="config-option">
-              <input type="radio" name="poze" data-price="180" data-label="20+ poze">
+              <input type="radio" name="mentenanta" data-price-monthly="45" data-label="Mentenanță Business">
               <span class="config-option-body">
-                <strong>20+ poze</strong>
-                <span class="config-option-price">+180 RON</span>
-              </span>
-            </label>
-          </div>
-        </div>
-
-        <div class="config-group">
-          <h2 class="config-group-title">5. Extra opțional</h2>
-          <div class="config-options">
-            <label class="config-option">
-              <input type="checkbox" data-price="200" data-label="SEO de bază">
-              <span class="config-option-body">
-                <strong>SEO de bază</strong>
-                <span class="config-option-desc">Structură și meta-taguri optimizate pentru Google</span>
-                <span class="config-option-price">+200 RON</span>
-              </span>
-            </label>
-            <label class="config-option">
-              <input type="checkbox" data-price="250" data-label="Limbi multiple (RO + EN)">
-              <span class="config-option-body">
-                <strong>Limbi multiple (RO + EN)</strong>
-                <span class="config-option-desc">Site disponibil și în engleză</span>
-                <span class="config-option-price">+250 RON</span>
-              </span>
-            </label>
-            <label class="config-option">
-              <input type="checkbox" data-price="150" data-label="Formular avansat">
-              <span class="config-option-body">
-                <strong>Formular avansat</strong>
-                <span class="config-option-desc">Validare, fișiere atașate, notificări pe email</span>
-                <span class="config-option-price">+150 RON</span>
-              </span>
-            </label>
-            <label class="config-option">
-              <input type="checkbox" data-price-monthly="80" data-label="Mentenanță lunară">
-              <span class="config-option-body">
-                <strong>Mentenanță lunară</strong>
-                <span class="config-option-desc">Actualizări și mici modificări, oricând ai nevoie</span>
-                <span class="config-option-price">80 RON/lună</span>
+                <strong>Business</strong>
+                <span class="config-option-desc">Până la 2 ore de modificări pe lună + asistență extinsă</span>
+                <span class="config-option-price">45 €/lună</span>
               </span>
             </label>
           </div>
@@ -179,13 +225,13 @@
         <ul class="config-summary-list" data-config-summary-list></ul>
         <div class="config-summary-total">
           <span>Total estimativ</span>
-          <strong data-config-total>0 RON</strong>
+          <strong data-config-total>0 €</strong>
         </div>
         <div class="config-summary-monthly" data-config-monthly hidden>
           <span>+ mentenanță</span>
-          <strong data-config-monthly-value>0 RON/lună</strong>
+          <strong data-config-monthly-value>0 €/lună</strong>
         </div>
-        <p class="config-summary-note">Preț orientativ — confirmăm exact după ce discutăm despre afacerea ta, fără costuri ascunse.</p>
+        <p class="config-summary-note">Domeniul (~10–15 €/an) și găzduirea (~60–100 €/an) sunt costuri reale, separate de pachet, necesare pentru ca site-ul să fie funcțional. Serviciile „cost la cerere" se discută separat, fără costuri ascunse.</p>
         <div class="config-summary-actions">
           <a href="#" class="btn btn-primary btn-block" data-config-whatsapp target="_blank" rel="noopener">Trimite pe WhatsApp</a>
           <a href="#" class="btn btn-ghost btn-block" data-config-contact>Trimite prin formular</a>

@@ -226,9 +226,11 @@ function initDomainCardVideos() {
   });
 }
 
-/* ---------- Configurator: build a package, see a live estimate ----------
-   Prices below are placeholders — edit the data-price / data-price-monthly
-   attributes in configurator.html to match ACCsite's real pricing. */
+/* ---------- Configurator: pick a package, see a live estimate ----------
+   Prices below mirror ACCsite's real offer (see the oferta PDF) — edit the
+   data-price / data-price-monthly attributes in configurator.html if they
+   change. Items marked data-quote="true" have no fixed price (discussed
+   separately) and never affect the total. */
 function initConfigurator() {
   const form = document.querySelector("[data-config-form]");
   if (!form) return;
@@ -239,7 +241,6 @@ function initConfigurator() {
   const monthlyEl = document.querySelector("[data-config-monthly-value]");
   const waBtn = document.querySelector("[data-config-whatsapp]");
   const contactBtn = document.querySelector("[data-config-contact]");
-  const steppers = document.querySelectorAll("[data-config-stepper]");
 
   const categoryBanner = document.querySelector("[data-config-category-banner]");
   const category = new URLSearchParams(window.location.search).get("tip");
@@ -248,21 +249,26 @@ function initConfigurator() {
     categoryBanner.querySelector("[data-config-category-value]").textContent = category;
   }
 
-  steppers.forEach((stepper) => {
-    const valueEl = stepper.querySelector("[data-stepper-value]");
-    const min = Number(stepper.dataset.min || 0);
-    const max = Number(stepper.dataset.max || 99);
-    stepper.querySelectorAll(".stepper-btn").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const delta = Number(btn.dataset.step);
-        const next = Math.min(max, Math.max(min, Number(valueEl.textContent) + delta));
-        valueEl.textContent = next;
-        update();
-      });
-    });
-  });
-
   form.addEventListener("change", update);
+
+  // Some optional services are already bundled into a package (e.g. PREMIUM
+  // already includes programări online + limbi multiple) — when that
+  // package is selected, force those checkboxes on and lock them, so the
+  // client isn't asked to "add" something they already have.
+  function syncPackageInclusions() {
+    const selectedPackage = form.querySelector('input[name="pachet"]:checked')?.value;
+    form.querySelectorAll("[data-included-by]").forEach((input) => {
+      const option = input.closest(".config-option");
+      if (input.dataset.includedBy === selectedPackage) {
+        input.checked = true;
+        input.disabled = true;
+        option?.classList.add("is-included");
+      } else {
+        input.disabled = false;
+        option?.classList.remove("is-included");
+      }
+    });
+  }
 
   function collect() {
     const items = [];
@@ -270,53 +276,47 @@ function initConfigurator() {
     let monthly = 0;
 
     form.querySelectorAll('input[type="radio"]:checked, input[type="checkbox"]:checked').forEach((input) => {
+      if (input.disabled) return;
+      const label = input.dataset.label;
+      if (!label) return;
       const price = Number(input.dataset.price || 0);
       const priceMonthly = Number(input.dataset.priceMonthly || 0);
-      const label = input.dataset.label || input.closest(".config-option")?.querySelector("strong")?.textContent || "";
-      if (!label) return;
-      items.push({ label, price, priceMonthly });
+      const quote = input.dataset.quote === "true";
+      items.push({ label, price, priceMonthly, quote });
       total += price;
       monthly += priceMonthly;
-    });
-
-    steppers.forEach((stepper) => {
-      const count = Number(stepper.querySelector("[data-stepper-value]").textContent);
-      if (count <= 0) return;
-      const price = count * Number(stepper.dataset.pricePer || 0);
-      items.push({ label: `${stepper.dataset.label || "Extra"}: ${count}`, price, priceMonthly: 0 });
-      total += price;
     });
 
     return { items, total, monthly };
   }
 
+  function priceLabel(item) {
+    if (item.priceMonthly) return `${item.priceMonthly} €/lună`;
+    if (item.price) return `${item.price} €`;
+    if (item.quote) return "cost la cerere";
+    return "inclus";
+  }
+
   function buildMessage(items, total, monthly) {
     const lines = ["Bună! Vreau o ofertă pentru un pachet ACCsite:"];
     if (category) lines.push(`Domeniu: ${category}`);
-    items.forEach((item) => {
-      const priceLabel = item.priceMonthly ? `${item.priceMonthly} RON/lună` : item.price ? `${item.price} RON` : "inclus";
-      lines.push(`• ${item.label} — ${priceLabel}`);
-    });
-    lines.push(`Total estimativ: ${total} RON${monthly ? ` + ${monthly} RON/lună` : ""}`);
+    items.forEach((item) => lines.push(`• ${item.label} — ${priceLabel(item)}`));
+    lines.push(`Total estimativ: ${total} €${monthly ? ` + ${monthly} €/lună` : ""}`);
     return lines.join("\n");
   }
 
   function update() {
+    syncPackageInclusions();
     const { items, total, monthly } = collect();
 
     summaryList.innerHTML = items.length
-      ? items
-          .map((item) => {
-            const priceLabel = item.priceMonthly ? `${item.priceMonthly} RON/lună` : item.price ? `${item.price} RON` : "inclus";
-            return `<li><span>${item.label}</span><span>${priceLabel}</span></li>`;
-          })
-          .join("")
+      ? items.map((item) => `<li><span>${item.label}</span><span>${priceLabel(item)}</span></li>`).join("")
       : '<li class="config-summary-empty">Alege opțiunile de mai sus pentru a vedea pachetul tău</li>';
 
-    totalEl.textContent = `${total} RON`;
+    totalEl.textContent = `${total} €`;
     if (monthly > 0) {
       monthlyWrap.hidden = false;
-      monthlyEl.textContent = `${monthly} RON/lună`;
+      monthlyEl.textContent = `${monthly} €/lună`;
     } else {
       monthlyWrap.hidden = true;
     }
