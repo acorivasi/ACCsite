@@ -251,21 +251,46 @@ function initConfigurator() {
 
   form.addEventListener("change", update);
 
-  // Some optional services are already bundled into a package (e.g. PREMIUM
-  // already includes programări online + limbi multiple) — when that
-  // package is selected, force those checkboxes on and lock them, so the
-  // client isn't asked to "add" something they already have.
-  function syncPackageInclusions() {
+  // Add-ons that a chosen package already bundles (e.g. PREMIUM already
+  // includes programări online, pagini nelimitate...) get force-checked
+  // and locked, so the client isn't asked to pay twice for the same thing.
+  // data-included-by is a comma list of package values ("business,premium").
+  function syncIncludedOptions() {
     const selectedPackage = form.querySelector('input[name="pachet"]:checked')?.value;
-    form.querySelectorAll("[data-included-by]").forEach((input) => {
+    const lockedRadioGroups = new Set();
+
+    // Snapshot "checked" before mutating anything — two radios in the same
+    // group can both become "included" by a package, and forcing the first
+    // one checked would otherwise flip the second one's live .checked to
+    // false via native radio-group exclusivity, before we get to read it.
+    const includedInputs = Array.from(form.querySelectorAll("[data-included-by]"));
+    const wasChecked = new Map(includedInputs.map((input) => [input, input.checked]));
+
+    includedInputs.forEach((input) => {
+      const isIncluded = input.dataset.includedBy.split(",").includes(selectedPackage);
       const option = input.closest(".config-option");
-      if (input.dataset.includedBy === selectedPackage) {
+      if (isIncluded) {
+        if (!wasChecked.get(input)) input.dataset.autoLocked = "true";
         input.checked = true;
-        input.disabled = true;
         option?.classList.add("is-included");
+        if (input.type === "radio" && input.name) lockedRadioGroups.add(input.name);
       } else {
-        input.disabled = false;
         option?.classList.remove("is-included");
+        if (input.dataset.autoLocked === "true") {
+          input.checked = false;
+          delete input.dataset.autoLocked;
+        }
+      }
+    });
+
+    form.querySelectorAll("input").forEach((input) => {
+      if (input.name === "pachet") return;
+      if (input.type === "checkbox") {
+        input.disabled = input.dataset.includedBy
+          ? input.dataset.includedBy.split(",").includes(selectedPackage)
+          : false;
+      } else if (input.type === "radio" && input.name) {
+        input.disabled = lockedRadioGroups.has(input.name);
       }
     });
   }
@@ -306,7 +331,7 @@ function initConfigurator() {
   }
 
   function update() {
-    syncPackageInclusions();
+    syncIncludedOptions();
     const { items, total, monthly } = collect();
 
     summaryList.innerHTML = items.length
