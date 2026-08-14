@@ -11,7 +11,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initReel();
   initReelModal();
   initReveal();
-  initDomainCardVideos();
   initConfigurator();
   initContactPrefill();
 });
@@ -212,17 +211,6 @@ function initReelModal() {
   });
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && !modal.hidden) close();
-  });
-}
-
-/* ---------- Portfolio domain cards: play video on hover (desktop) ---------- */
-function initDomainCardVideos() {
-  const cards = document.querySelectorAll(".domain-card[data-hover-play]");
-  cards.forEach((card) => {
-    const video = card.querySelector("video");
-    if (!video) return;
-    card.addEventListener("mouseenter", () => video.play().catch(() => {}));
-    card.addEventListener("mouseleave", () => video.pause());
   });
 }
 
