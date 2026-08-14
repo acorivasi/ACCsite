@@ -17,9 +17,9 @@ Site de prezentare — portofoliu creare website-uri pentru afaceri mici locale.
 Site-ul are două teme, comutabile din header (butonul oval de lângă CTA) și persistate în `localStorage`:
 
 - **Noir** (implicit) — fundal negru, text alb, accent turcoaz oceanic
-- **Smarald** — fundal verde smarald adânc, text alb, accent cărămiziu cald
+- **Alb** — fundal alb, text negru, același accent turcoaz oceanic
 
-Temele sunt definite ca variabile CSS în `css/style.css`, sub `:root`/`[data-theme="noir"]` și `[data-theme="emerald"]`.
+Temele sunt definite ca variabile CSS în `css/style.css`, sub `:root`/`[data-theme="noir"]` și `[data-theme="alb"]`.
 
 ## Rulare locală
 
