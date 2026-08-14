@@ -12,9 +12,9 @@
   --color-surface: #16161a;
   --bg-rgb: 10, 10, 11;
 
-  --color-primary: #2bb3ad;
-  --color-primary-dark: #1f8f8a;
-  --color-primary-light: rgba(43, 179, 173, 0.14);
+  --color-primary: #00c2b3;
+  --color-primary-dark: #00978c;
+  --color-primary-light: rgba(0, 194, 179, 0.14);
   /* cameleonic gemstone gradient — safir oceanic → verde smarald, folosit
      doar pe suprafețe (butoane, thumb) unde poate licări; textul/linkurile
      rămân pe --color-primary, un ton fix, pentru lizibilitate */
@@ -43,9 +43,9 @@
 
   --shadow-soft: 0 16px 40px rgba(0, 0, 0, 0.45);
   --shadow-hover: 0 26px 64px rgba(0, 0, 0, 0.55);
-  --shadow-btn: 0 10px 26px rgba(43, 179, 173, 0.28);
+  --shadow-btn: 0 10px 26px rgba(0, 194, 179, 0.28);
 
-  --color-glow-rgb: 43, 179, 173;
+  --color-glow-rgb: 0, 194, 179;
 
   color-scheme: dark;
 }
@@ -58,9 +58,9 @@
   --color-surface: #f7f7f5;
   --bg-rgb: 255, 255, 255;
 
-  --color-primary: #2bb3ad;
-  --color-primary-dark: #1f8f8a;
-  --color-primary-light: rgba(43, 179, 173, 0.14);
+  --color-primary: #00c2b3;
+  --color-primary-dark: #00978c;
+  --color-primary-light: rgba(0, 194, 179, 0.14);
   --gradient-primary: linear-gradient(125deg, #0c7a9e 0%, #17a99a 40%, #21c98a 70%, #0c7a9e 100%);
   --color-glow-rgb-2: 33, 201, 138;
 
@@ -86,9 +86,9 @@
 
   --shadow-soft: 0 16px 40px rgba(10, 10, 11, 0.1);
   --shadow-hover: 0 26px 64px rgba(10, 10, 11, 0.16);
-  --shadow-btn: 0 10px 26px rgba(43, 179, 173, 0.28);
+  --shadow-btn: 0 10px 26px rgba(0, 194, 179, 0.28);
 
-  --color-glow-rgb: 43, 179, 173;
+  --color-glow-rgb: 0, 194, 179;
 
   color-scheme: light;
 }
