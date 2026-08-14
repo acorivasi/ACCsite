@@ -1162,37 +1162,50 @@ form.contact-form { display: flex; flex-direction: column; gap: 16px; }
   outline-offset: 2px;
 }
 
-.config-stepper {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 14px 18px;
-  border-radius: var(--radius);
-  border: 1.5px solid var(--color-border);
-  background: var(--color-surface);
-  width: fit-content;
-}
-.stepper-btn {
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  border: 1.5px solid var(--color-border);
-  background: transparent;
-  color: var(--color-text);
-  font-size: 1.2rem;
-  line-height: 1;
-  cursor: pointer;
-  transition: border-color var(--transition), color var(--transition);
-}
-.stepper-btn:hover, .stepper-btn:focus-visible { border-color: var(--color-primary); color: var(--color-primary); }
-.stepper-value {
+.config-group-subtitle { font-family: var(--font-body); font-weight: 400; font-size: 0.85rem; color: var(--color-text-light); }
+
+/* Package cards (pachet de bază) — bigger, with a feature checklist */
+.config-packages { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); align-items: start; }
+.config-package { padding-top: 13px; }
+.config-package .config-option-body { padding-top: 22px; }
+.config-package-badge {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  background: var(--color-primary);
+  color: var(--color-on-accent);
   font-family: var(--font-heading);
   font-weight: 700;
-  font-size: 1.15rem;
-  min-width: 1.4em;
-  text-align: center;
+  font-size: 0.66rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
 }
-.config-stepper .config-option-desc { margin-left: 4px; }
+.config-package-badge-premium { background: var(--color-secondary); color: var(--color-ink); }
+.config-package-name { font-family: var(--font-heading); font-weight: 700; font-size: 1.1rem; }
+.config-package-price { font-size: 1.3rem; }
+.config-package-features {
+  list-style: none;
+  margin: 14px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: var(--color-text-light);
+}
+.config-package-features li { display: flex; gap: 8px; align-items: flex-start; }
+.config-package-features li::before { content: "✓"; color: var(--color-primary); font-weight: 700; flex-shrink: 0; }
+
+/* Optional service already bundled into the selected package */
+.config-option-included-note { display: none; font-size: 0.78rem; color: var(--color-primary); font-weight: 600; }
+.config-option.is-included .config-option-body { opacity: 0.7; }
+.config-option.is-included .config-option-included-note { display: block; }
+.config-option.is-included .config-option-price { display: none; }
 
 .config-summary {
   position: sticky;
