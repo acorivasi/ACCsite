@@ -15,19 +15,19 @@ document.addEventListener("DOMContentLoaded", () => {
   initContactPrefill();
 });
 
-/* ---------- Theme: Noir / Smarald ---------- */
+/* ---------- Theme: Noir / Alb ---------- */
 function initTheme() {
   const root = document.documentElement;
   const stored = localStorage.getItem(THEME_KEY);
-  if (stored === "noir" || stored === "emerald") root.setAttribute("data-theme", stored);
+  if (stored === "noir" || stored === "alb") root.setAttribute("data-theme", stored);
 
   document.querySelectorAll("[data-theme-toggle]").forEach((btn) => {
     btn.addEventListener("click", () => {
-      const current = root.getAttribute("data-theme") === "emerald" ? "emerald" : "noir";
-      const next = current === "emerald" ? "noir" : "emerald";
+      const current = root.getAttribute("data-theme") === "alb" ? "alb" : "noir";
+      const next = current === "alb" ? "noir" : "alb";
       root.setAttribute("data-theme", next);
       localStorage.setItem(THEME_KEY, next);
-      btn.setAttribute("aria-pressed", next === "emerald" ? "true" : "false");
+      btn.setAttribute("aria-pressed", next === "alb" ? "true" : "false");
     });
   });
 }

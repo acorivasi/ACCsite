@@ -1,6 +1,6 @@
 /* ==========================================================================
    ACCsite — studio web pentru afaceri locale de calitate
-   Design system: două teme (Noir / Smarald), tipografie editorială,
+   Design system: două teme (Noir / Alb), tipografie editorială,
    meniu interactiv, materiale translucide, mișcare cu sens.
    ========================================================================== */
 
@@ -45,45 +45,45 @@
   color-scheme: dark;
 }
 
-[data-theme="emerald"] {
-  /* -- Smarald: verde smarald adânc, text alb, accent cărămiziu cald —
-     aceeași gravitate ca Noir, fără urmă de bej/camel -- */
-  --color-bg: #0d211a;
-  --color-bg-alt: #12291f;
-  --color-surface: #173225;
-  --bg-rgb: 13, 33, 26;
+[data-theme="alb"] {
+  /* -- Alb: fundal alb, text negru, același accent turcoaz ca în Noir —
+     doar un switch de fundal/text, fără o a doua paletă de culori -- */
+  --color-bg: #ffffff;
+  --color-bg-alt: #f5f5f3;
+  --color-surface: #f7f7f5;
+  --bg-rgb: 255, 255, 255;
 
-  --color-primary: #c96a45;
-  --color-primary-dark: #a2502f;
-  --color-primary-light: rgba(201, 106, 69, 0.16);
+  --color-primary: #2bb3ad;
+  --color-primary-dark: #1f8f8a;
+  --color-primary-light: rgba(43, 179, 173, 0.14);
 
-  --color-secondary: #eef0ea;
-  --color-secondary-dark: #d7dcd0;
-  --color-secondary-light: rgba(238, 240, 234, 0.1);
+  --color-secondary: #ece6d8;
+  --color-secondary-dark: #d9d2c0;
+  --color-secondary-light: rgba(236, 230, 216, 0.35);
 
   --color-accent: var(--color-primary);
   --color-accent-dark: var(--color-primary-dark);
-  --color-on-accent: #1a0e08;
+  --color-on-accent: #0a0a0b;
 
   --color-whatsapp: #25d366;
   --color-whatsapp-dark: #1ebc59;
 
-  --color-text: #f5f2ea;
-  --color-text-light: #9fb0a3;
+  --color-text: #0a0a0b;
+  --color-text-light: #5c5f63;
   --color-white: #ffffff;
-  --color-border: rgba(245, 242, 234, 0.13);
+  --color-border: rgba(10, 10, 11, 0.12);
 
-  --color-media-bg: #0a1a13;
-  --color-media-rgb: 6, 16, 11;
-  --color-ink: #081712;
+  --color-media-bg: #eeeeec;
+  --color-media-rgb: 238, 238, 236;
+  --color-ink: #0a0a0b;
 
-  --shadow-soft: 0 16px 40px rgba(4, 12, 9, 0.5);
-  --shadow-hover: 0 26px 64px rgba(4, 12, 9, 0.58);
-  --shadow-btn: 0 10px 26px rgba(201, 106, 69, 0.28);
+  --shadow-soft: 0 16px 40px rgba(10, 10, 11, 0.1);
+  --shadow-hover: 0 26px 64px rgba(10, 10, 11, 0.16);
+  --shadow-btn: 0 10px 26px rgba(43, 179, 173, 0.28);
 
-  --color-glow-rgb: 201, 106, 69;
+  --color-glow-rgb: 43, 179, 173;
 
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 :root {
@@ -216,7 +216,6 @@ section { padding: 104px 0; }
   background: var(--color-primary-dark);
   box-shadow: 0 16px 34px rgba(43, 179, 173, 0.32);
 }
-[data-theme="emerald"] .btn-primary:hover { box-shadow: 0 16px 34px rgba(201, 106, 69, 0.34); }
 
 .btn-secondary {
   background: var(--color-secondary);
@@ -374,7 +373,8 @@ section { padding: 104px 0; }
   width: 46px;
   height: 26px;
   border-radius: var(--radius-pill);
-  background: linear-gradient(90deg, #2bb3ad 50%, #c96a45 50%);
+  background: linear-gradient(90deg, #0a0a0b 50%, #ffffff 50%);
+  border: 1px solid rgba(10, 10, 11, 0.15);
   display: flex;
   align-items: center;
   padding: 3px;
@@ -383,12 +383,12 @@ section { padding: 104px 0; }
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: var(--color-white);
+  background: var(--color-primary);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
   transform: translateX(0);
   transition: transform 260ms var(--ease-out);
 }
-[data-theme="emerald"] .theme-toggle-thumb { transform: translateX(20px); }
+[data-theme="alb"] .theme-toggle-thumb { transform: translateX(20px); }
 .theme-toggle-label { font-size: 0; }
 
 /* ---------- Nav toggle (mobile burger -> X) ---------- */
@@ -499,7 +499,7 @@ section { padding: 104px 0; }
   75% { transform: translate(-1%, 2%); }
 }
 
-/* a slow-drifting spotlight — white glow in Noir, emerald bloom in Smarald */
+/* a slow-drifting spotlight in the shared accent colour, same in both themes */
 .hero-spotlight {
   position: absolute;
   z-index: 0;
@@ -803,9 +803,7 @@ section { padding: 104px 0; }
   .project-card:hover .project-card-media img { transform: scale(1.05); }
 }
 .project-card-tag {
-  position: absolute;
-  top: 16px;
-  left: 16px;
+  flex-shrink: 0;
   font-size: 0.72rem;
   font-weight: 600;
   letter-spacing: 0.08em;
@@ -817,6 +815,12 @@ section { padding: 104px 0; }
 .project-card-body { padding: 24px; }
 .project-card-body h3 { font-family: var(--font-display); font-weight: 500; font-size: 1.25rem; margin-bottom: 8px; }
 .project-card-body p { font-size: 0.92rem; margin-bottom: 18px; }
+.project-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
 .project-card-link {
   display: inline-flex;
   align-items: center;
