@@ -251,6 +251,13 @@ function initConfigurator() {
 
   form.addEventListener("change", update);
 
+  [waBtn, contactBtn].forEach((btn) => {
+    if (!btn) return;
+    btn.addEventListener("click", (e) => {
+      if (btn.getAttribute("aria-disabled") === "true") e.preventDefault();
+    });
+  });
+
   // Add-ons that a chosen package already bundles (e.g. PREMIUM already
   // includes programări online, pagini nelimitate...) get force-checked
   // and locked, so the client isn't asked to pay twice for the same thing.
@@ -333,10 +340,11 @@ function initConfigurator() {
   function update() {
     syncIncludedOptions();
     const { items, total, monthly } = collect();
+    const hasPackage = !!form.querySelector('input[name="pachet"]:checked');
 
     summaryList.innerHTML = items.length
       ? items.map((item) => `<li><span>${item.label}</span><span>${priceLabel(item)}</span></li>`).join("")
-      : '<li class="config-summary-empty">Alege opțiunile de mai sus pentru a vedea pachetul tău</li>';
+      : '<li class="config-summary-empty">Alege un pachet mai sus pentru a vedea prețul</li>';
 
     totalEl.textContent = `${total} €`;
     if (monthly > 0) {
@@ -347,8 +355,13 @@ function initConfigurator() {
     }
 
     const message = buildMessage(items, total, monthly);
-    if (waBtn) waBtn.href = `https://wa.me/40727731227?text=${encodeURIComponent(message)}`;
-    if (contactBtn) contactBtn.href = `contact.html?pachet=${encodeURIComponent(message)}`;
+    [waBtn, contactBtn].forEach((btn) => {
+      if (!btn) return;
+      btn.classList.toggle("is-disabled", !hasPackage);
+      btn.setAttribute("aria-disabled", hasPackage ? "false" : "true");
+    });
+    if (waBtn) waBtn.href = hasPackage ? `https://wa.me/40727731227?text=${encodeURIComponent(message)}` : "#";
+    if (contactBtn) contactBtn.href = hasPackage ? `contact.html?pachet=${encodeURIComponent(message)}` : "#";
   }
 
   update();
