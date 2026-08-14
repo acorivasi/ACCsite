@@ -1,5 +1,13 @@
 // Bella Beauty Studio — site scripts
 document.addEventListener("DOMContentLoaded", function () {
+  /* Hero video: skip autoplay for visitors who prefer reduced motion — the
+     poster image (same first-frame look) stays as a static fallback. */
+  var heroVideo = document.querySelector(".hero__bg");
+  if (heroVideo && heroVideo.tagName === "VIDEO" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    heroVideo.removeAttribute("autoplay");
+    heroVideo.pause();
+  }
+
   /* Mobile nav toggle */
   var nav = document.querySelector(".nav");
   var toggle = document.querySelector(".nav__toggle");
