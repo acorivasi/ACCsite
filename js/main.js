@@ -153,34 +153,41 @@ function initReel() {
   tiles.forEach((tile) => io.observe(tile));
 }
 
-/* ---------- Reel: freeze the marquee on touch ----------
-   The strip only pauses on :hover/:focus-within, which never fires on
-   touchscreens — so on mobile it keeps sliding under your finger and a tap
-   can land on whichever tile has since scrolled into that spot, not the one
-   you saw. Pause as soon as a touch starts anywhere on the track, and only
-   resume a moment after it ends, so the tap always lands on the tile the
-   user actually meant to hit. */
+/* ---------- Reel: freeze the marquee on touch/click/focus, then resume ----------
+   Two problems, one fix. (1) On touchscreens the strip never pauses at all
+   (no :hover there), so it keeps sliding under your finger and a tap can
+   land on whichever tile has since scrolled into that spot. (2) Clicking a
+   tile focuses it (tabindex="0"), and closing the modal returns focus to
+   that same tile — so a plain CSS ":focus-within pauses" rule latches the
+   whole marquee paused forever after the very first click, since a mouse
+   user never tabs away to release focus. Fix: track touch/focus with a
+   single debounced class instead of raw :focus-within, so it pauses on
+   contact and always resumes a moment later regardless of where focus
+   ends up. */
 function initReelPauseOnTouch() {
   const track = document.querySelector(".reel-track");
   if (!track) return;
 
   let resumeTimer = null;
-  track.addEventListener(
-    "touchstart",
-    () => {
-      clearTimeout(resumeTimer);
-      track.classList.add("is-touched");
-    },
-    { passive: true }
-  );
-  track.addEventListener(
-    "touchend",
-    () => {
-      clearTimeout(resumeTimer);
-      resumeTimer = setTimeout(() => track.classList.remove("is-touched"), 2500);
-    },
-    { passive: true }
-  );
+  const pause = () => {
+    clearTimeout(resumeTimer);
+    track.classList.add("is-touched");
+  };
+  const scheduleResume = () => {
+    clearTimeout(resumeTimer);
+    resumeTimer = setTimeout(() => track.classList.remove("is-touched"), 2500);
+  };
+
+  track.addEventListener("touchstart", pause, { passive: true });
+  track.addEventListener("touchend", scheduleResume, { passive: true });
+  // Focus can linger on a tile indefinitely after the modal closes (focus
+  // deliberately returns there for keyboard users), so "focusout" may never
+  // fire — schedule the auto-resume right away instead of waiting for it.
+  track.addEventListener("focusin", () => {
+    pause();
+    scheduleResume();
+  });
+  track.addEventListener("focusout", scheduleResume);
 }
 
 /* ---------- Reel tile modal: tap/click a tile for a bigger view ---------- */

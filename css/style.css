@@ -644,7 +644,7 @@ section { padding: 104px 0; }
   gap: 18px;
   animation: reel-scroll 48s linear infinite;
 }
-.reel-track:hover, .reel-track:focus-within, .reel-track.is-touched { animation-play-state: paused; }
+.reel-track:hover, .reel-track.is-touched { animation-play-state: paused; }
 @keyframes reel-scroll {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
