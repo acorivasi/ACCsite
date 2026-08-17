@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — BrightSmile Dental Care</title>
+<meta name="description" content="Programează-te la BrightSmile Dental Care — adresă, program, telefon, WhatsApp și formular de contact.">
+<link rel="canonical" href="https://www.brightsmiledentalcare.ro/contact.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='28' fill='%232f8fd1'/%3E%3Ctext x='50' y='68' font-size='52' text-anchor='middle' fill='white' font-family='Arial,sans-serif' font-weight='700'%3EB%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="index.html" class="logo"><span class="logo-dot"></span>Bright<span>Smile</span></a>
+    <nav class="main-nav">
+      <a href="index.html">Acasă</a>
+      <a href="despre.html">Despre noi</a>
+      <a href="servicii.html">Servicii</a>
+      <a href="galerie.html">Galerie</a>
+      <a href="recenzii.html">Recenzii</a>
+      <a href="faq.html">Întrebări</a>
+      <a href="contact.html" class="active">Contact</a>
+    </nav>
+    <div class="header-cta">
+      <a href="contact.html" class="btn btn-primary">Programează-te</a>
+      <button class="nav-toggle" aria-label="Deschide meniul" aria-expanded="false"><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow">Contact</span>
+      <h1>Hai să programăm o consultație</h1>
+      <p>Prima consultație e gratuită, fără obligații. Scrie-ne pe WhatsApp pentru cel mai rapid răspuns.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="container contact-grid">
+      <div class="reveal contact-card">
+        <h2>Scrie-ne direct</h2>
+        <p>Alege metoda care ți se potrivește — răspundem de obicei în aceeași zi.</p>
+        <ul class="contact-methods">
+          <li>
+            <a href="https://wa.me/40740223456?text=Bună!%20Aș%20vrea%20să%20fac%20o%20programare." target="_blank" rel="noopener">
+              <span class="value-icon" style="background:var(--color-whatsapp); color:#fff;">💬</span>
+              <div><strong>WhatsApp</strong><p style="margin:2px 0 0;">Cel mai rapid mod de a ne contacta</p></div>
+            </a>
+          </li>
+          <li>
+            <a href="tel:+40740223456">
+              <span class="value-icon">📞</span>
+              <div><strong>0740 223 456</strong><p style="margin:2px 0 0;">Luni–Vineri, 09:00–20:00</p></div>
+            </a>
+          </li>
+          <li>
+            <a href="mailto:contact@brightsmiledentalcare.ro">
+              <span class="value-icon">✉</span>
+              <div><strong>contact@brightsmiledentalcare.ro</strong><p style="margin:2px 0 0;">Pentru întrebări detaliate</p></div>
+            </a>
+          </li>
+        </ul>
+
+        <div style="margin-top:28px;">
+          <h4 style="font-family:var(--font-heading); margin-bottom:10px;">Program</h4>
+          <p style="margin:0;">Luni – Vineri: 09:00 – 20:00<br>Sâmbătă: 09:00 – 14:00<br>Duminică: închis</p>
+        </div>
+        <div style="margin-top:20px;">
+          <h4 style="font-family:var(--font-heading); margin-bottom:10px;">Adresă</h4>
+          <p style="margin:0;">Str. Aviatorilor nr. 24, București<br>Parcare disponibilă în apropiere</p>
+        </div>
+
+        <div class="contact-map">
+          <iframe src="https://www.google.com/maps?q=Bucure%C8%99ti&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Locația BrightSmile Dental Care"></iframe>
+        </div>
+      </div>
+
+      <div class="reveal contact-card">
+        <h2>Sau completează formularul</h2>
+        <form class="contact-form" action="mailto:contact@brightsmiledentalcare.ro" method="post" enctype="text/plain">
+          <div>
+            <label for="nume">Nume</label>
+            <input type="text" id="nume" name="nume" placeholder="Numele tău" required>
+          </div>
+          <div>
+            <label for="serviciu">Ce te interesează?</label>
+            <select id="serviciu" name="serviciu">
+              <option>Consultație generală</option>
+              <option>Estetică dentară</option>
+              <option>Ortodonție</option>
+              <option>Implantologie</option>
+              <option>Pedodonție (copii)</option>
+              <option>Urgență</option>
+            </select>
+          </div>
+          <div>
+            <label for="contact-info">Telefon sau email</label>
+            <input type="text" id="contact-info" name="contact-info" placeholder="Cum te putem contacta" required>
+          </div>
+          <div>
+            <label for="mesaj">Mesaj</label>
+            <textarea id="mesaj" name="mesaj" placeholder="Spune-ne pe scurt ce te interesează sau ce te doare"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Trimite mesajul</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a href="index.html" class="logo"><span class="logo-dot"></span>Bright<span>Smile</span></a>
+        <p style="margin-top:14px; max-width:38ch;">Stomatologie modernă, fără stres — consultații, estetică, ortodonție, implantologie și pedodonție.</p>
+      </div>
+      <div>
+        <h4>Navigare</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Acasă</a></li>
+          <li><a href="despre.html">Despre noi</a></li>
+          <li><a href="servicii.html">Servicii</a></li>
+          <li><a href="galerie.html">Galerie</a></li>
+          <li><a href="recenzii.html">Recenzii</a></li>
+          <li><a href="faq.html">Întrebări</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul class="footer-links">
+          <li><a href="https://wa.me/40740223456" target="_blank" rel="noopener">WhatsApp</a></li>
+          <li><a href="tel:+40740223456">0740 223 456</a></li>
+          <li><a href="mailto:contact@brightsmiledentalcare.ro">contact@brightsmiledentalcare.ro</a></li>
+          <li>Str. Aviatorilor nr. 24, București</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 BrightSmile Dental Care. Toate drepturile rezervate.</span>
+      <span>Demo realizat de ACCsite.</span>
+    </div>
+  </div>
+</footer>
+
+<a href="https://wa.me/40740223456?text=Bună!%20Aș%20vrea%20să%20fac%20o%20programare." class="wa-float" target="_blank" rel="noopener" aria-label="Scrie-ne pe WhatsApp">💬</a>
+
+<script src="js/main.js"></script>
+</body>
+</html>

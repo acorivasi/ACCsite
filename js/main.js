@@ -163,6 +163,7 @@ function initReelModal() {
   const title = modal.querySelector("[data-reel-modal-title]");
   const desc = modal.querySelector("[data-reel-modal-desc]");
   const configureLink = modal.querySelector("[data-reel-modal-configure]");
+  const projectLink = modal.querySelector("[data-reel-modal-project]");
   let lastFocused = null;
 
   function open(tile) {
@@ -179,6 +180,14 @@ function initReelModal() {
     desc.textContent = tile.dataset.desc || "";
     if (configureLink && tile.dataset.title) {
       configureLink.href = `configurator.html?tip=${encodeURIComponent(tile.dataset.title)}`;
+    }
+    if (projectLink) {
+      if (tile.dataset.project) {
+        projectLink.href = tile.dataset.project;
+        projectLink.hidden = false;
+      } else {
+        projectLink.hidden = true;
+      }
     }
 
     lastFocused = document.activeElement;

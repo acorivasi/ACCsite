@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600">
+  <defs>
+    <linearGradient id="g_gallery_cabinet_3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#7fe0c4"/>
+      <stop offset="100%" stop-color="#1f9c81"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="600" fill="url(#g_gallery_cabinet_3)"/>
+  <text x="50%" y="44%" font-family="Georgia, serif" font-size="90" fill="#ffffff" fill-opacity="0.92" text-anchor="middle" dominant-baseline="middle">🛋️</text>
+  <text x="50%" y="62%" font-family="Verdana, sans-serif" font-size="34" font-weight="bold" fill="#ffffff" text-anchor="middle" dominant-baseline="middle">Recepție</text>
+  <text x="50%" y="70%" font-family="Verdana, sans-serif" font-size="22" fill="#ffffff" fill-opacity="0.85" text-anchor="middle" dominant-baseline="middle">Zonă de așteptare</text>
+</svg>
