@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initNavPill();
   initHeaderScroll();
   initReel();
+  initReelPauseOnTouch();
   initReelModal();
   initReveal();
   initConfigurator();
@@ -150,6 +151,36 @@ function initReel() {
     { rootMargin: "200px" }
   );
   tiles.forEach((tile) => io.observe(tile));
+}
+
+/* ---------- Reel: freeze the marquee on touch ----------
+   The strip only pauses on :hover/:focus-within, which never fires on
+   touchscreens — so on mobile it keeps sliding under your finger and a tap
+   can land on whichever tile has since scrolled into that spot, not the one
+   you saw. Pause as soon as a touch starts anywhere on the track, and only
+   resume a moment after it ends, so the tap always lands on the tile the
+   user actually meant to hit. */
+function initReelPauseOnTouch() {
+  const track = document.querySelector(".reel-track");
+  if (!track) return;
+
+  let resumeTimer = null;
+  track.addEventListener(
+    "touchstart",
+    () => {
+      clearTimeout(resumeTimer);
+      track.classList.add("is-touched");
+    },
+    { passive: true }
+  );
+  track.addEventListener(
+    "touchend",
+    () => {
+      clearTimeout(resumeTimer);
+      resumeTimer = setTimeout(() => track.classList.remove("is-touched"), 2500);
+    },
+    { passive: true }
+  );
 }
 
 /* ---------- Reel tile modal: tap/click a tile for a bigger view ---------- */
