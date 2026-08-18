@@ -278,13 +278,31 @@ function initConfigurator() {
   const contactBtn = document.querySelector("[data-config-contact]");
 
   const categoryBanner = document.querySelector("[data-config-category-banner]");
-  const category = new URLSearchParams(window.location.search).get("tip");
+  let category = new URLSearchParams(window.location.search).get("tip");
   if (categoryBanner && category) {
     categoryBanner.hidden = false;
     categoryBanner.querySelector("[data-config-category-value]").textContent = category;
   }
 
   form.addEventListener("change", update);
+
+  // Reset: a client who picked the wrong options can start over in one
+  // click, instead of manually unchecking everything.
+  const resetBtn = document.querySelector("[data-config-reset]");
+  if (resetBtn) {
+    resetBtn.addEventListener("click", () => {
+      form.reset();
+      if (category) {
+        category = null;
+        if (categoryBanner) categoryBanner.hidden = true;
+        const url = new URL(window.location.href);
+        url.searchParams.delete("tip");
+        window.history.replaceState({}, "", url);
+      }
+      update();
+      form.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  }
 
   [waBtn, contactBtn].forEach((btn) => {
     if (!btn) return;

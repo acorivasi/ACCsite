@@ -1126,6 +1126,7 @@ form.contact-form { display: flex; flex-direction: column; gap: 16px; }
   color: var(--color-text-light);
 }
 .config-category-banner strong { color: var(--color-primary); }
+.config-category-banner[hidden] { display: none; }
 
 .configurator {
   display: grid;
@@ -1252,7 +1253,21 @@ form.contact-form { display: flex; flex-direction: column; gap: 16px; }
   padding: 28px;
   transition: background-color var(--transition-color), border-color var(--transition);
 }
-.config-summary h3 { font-family: var(--font-heading); font-size: 1.1rem; margin: 0 0 16px; }
+.config-summary-header { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin: 0 0 16px; }
+.config-summary h3 { font-family: var(--font-heading); font-size: 1.1rem; margin: 0; }
+.config-summary-reset {
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  color: var(--color-text-light);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+  transition: color var(--transition-color);
+}
+.config-summary-reset:hover, .config-summary-reset:focus-visible { color: var(--color-primary); }
 .config-summary-list {
   list-style: none;
   margin: 0 0 18px;
