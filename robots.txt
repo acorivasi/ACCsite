@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://acorivasi.github.io/ACCsite/sitemap.xml
