@@ -31,23 +31,28 @@ python3 -m http.server 8000
 
 apoi accesează `http://localhost:8000`.
 
-## Publicare (fără domeniu propriu)
+## Publicare
 
-Repo-ul nu are un domeniu cumpărat (`accsite.ro` nu e deținut). Site-ul poate fi
-publicat gratuit prin **GitHub Pages**, la o adresă de forma:
+Site-ul e publicat prin **GitHub Pages** (branch `main`), pe domeniul propriu:
 
 ```
-https://acorivasi.github.io/ACCsite/
+https://accsite.ro/
 ```
 
-`canonical` / `og:url` din fiecare pagină sunt setate provizoriu spre această
-adresă. Dacă mai târziu se cumpără un domeniu propriu, adresele trebuie
-actualizate din nou (căutare rapidă după `acorivasi.github.io` în fișierele
-`.html`).
+DNS-ul e găzduit pe **Cloudflare** (nameservere puse la ROTLD, în modul
+"DNS only" — fără proxy, ca certificatul SSL emis de GitHub să funcționeze
+corect): 4 înregistrări `A` pe `@` spre IP-urile GitHub Pages, plus un
+`CNAME` pentru `www` spre `acorivasi.github.io`. Fișierul `CNAME` din
+rădăcina repo-ului (creat automat de GitHub la activarea domeniului custom)
+conține `accsite.ro`.
+
+`canonical` / `og:url` / `sitemap.xml` / `robots.txt` / datele structurate
+JSON-LD din `index.html` sunt toate pe adresa finală.
 
 ## De completat înainte de lansare
 
 - [x] Număr WhatsApp real (`0727731227`)
 - [x] Adresă de email (`accsite@gmail.com`) — necesită creată efectiv contul, dacă nu există deja
-- [ ] Activează GitHub Pages pe branch-ul `main` (Settings → Pages), dacă nu e deja activ
-- [ ] Dacă se cumpără un domeniu propriu: actualizează `canonical` / `og:url` și configurează DNS-ul spre GitHub Pages
+- [x] Activează GitHub Pages pe branch-ul `main` (Settings → Pages)
+- [x] Cumpără domeniul propriu, configurează DNS-ul (Cloudflare) și activează-l ca domeniu custom în GitHub Pages
+- [ ] Google Search Console + Google Business Profile pe domeniul final
