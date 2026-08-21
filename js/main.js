@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initReveal();
   initConfigurator();
   initContactPrefill();
+  initContactForm();
 });
 
 /* ---------- Theme: Noir / Alb ---------- */
@@ -429,4 +430,60 @@ function initContactPrefill() {
   textarea.value = pachet;
   const note = document.querySelector("[data-config-note]");
   if (note) note.hidden = false;
+}
+
+/* ---------- Contact form: submit via Web3Forms, no mail client popup ----------
+   A plain mailto: form only works if the visitor has a desktop mail client
+   configured — most people just use Gmail in the browser, so it silently
+   fails for them. Web3Forms delivers the submission by email without ever
+   leaving the page, so it works the same for everyone. */
+function initContactForm() {
+  const form = document.querySelector("[data-contact-form]");
+  if (!form) return;
+
+  const status = document.querySelector("[data-contact-status]");
+  const submitBtn = form.querySelector('button[type="submit"]');
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Se trimite...";
+    }
+    if (status) {
+      status.hidden = true;
+      status.classList.remove("is-error", "is-success");
+    }
+
+    try {
+      const response = await fetch(form.action, {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: new FormData(form),
+      });
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        form.reset();
+        if (status) {
+          status.textContent = "Mesaj trimis — îți răspundem cât mai curând, de obicei în aceeași zi.";
+          status.classList.add("is-success");
+          status.hidden = false;
+        }
+      } else {
+        throw new Error(result.message || "Eroare la trimitere");
+      }
+    } catch (err) {
+      if (status) {
+        status.textContent = "Nu am putut trimite mesajul. Încearcă din nou sau scrie-ne direct pe WhatsApp.";
+        status.classList.add("is-error");
+        status.hidden = false;
+      }
+    } finally {
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Trimite mesajul";
+      }
+    }
+  });
 }

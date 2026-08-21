@@ -1049,6 +1049,16 @@ form.contact-form { display: flex; flex-direction: column; gap: 16px; }
   box-shadow: 0 0 0 4px var(--color-primary-light);
 }
 .contact-form textarea { resize: vertical; min-height: 140px; }
+.contact-form-status {
+  margin: -4px 0 0;
+  padding: 12px 16px;
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  font-family: var(--font-body);
+}
+.contact-form-status.is-success { background: rgba(37, 211, 102, 0.12); color: var(--color-whatsapp-dark); border: 1px solid rgba(37, 211, 102, 0.3); }
+.contact-form-status.is-error { background: rgba(225, 74, 61, 0.12); color: #e14a3d; border: 1px solid rgba(225, 74, 61, 0.3); }
+.contact-form-status[hidden] { display: none; }
 
 /* ---------- Whatsapp float button ---------- */
 .wa-float {
