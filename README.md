@@ -51,8 +51,8 @@ JSON-LD din `index.html` sunt toate pe adresa finală.
 
 ## De completat înainte de lansare
 
-- [x] Număr WhatsApp real (`0727731227`)
-- [x] Adresă de email (`accsite@gmail.com`) — necesită creată efectiv contul, dacă nu există deja
+- [x] Număr WhatsApp real (`0745932358`)
+- [x] Adresă de email (`accsite.web@gmail.com`) — necesită creată efectiv contul, dacă nu există deja
 - [x] Activează GitHub Pages pe branch-ul `main` (Settings → Pages)
 - [x] Cumpără domeniul propriu, configurează DNS-ul (Cloudflare) și activează-l ca domeniu custom în GitHub Pages
 - [ ] Google Search Console + Google Business Profile pe domeniul final

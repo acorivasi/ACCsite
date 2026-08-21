@@ -413,7 +413,7 @@ function initConfigurator() {
       btn.classList.toggle("is-disabled", !hasPackage);
       btn.setAttribute("aria-disabled", hasPackage ? "false" : "true");
     });
-    if (waBtn) waBtn.href = hasPackage ? `https://wa.me/40727731227?text=${encodeURIComponent(message)}` : "#";
+    if (waBtn) waBtn.href = hasPackage ? `https://wa.me/40745932358?text=${encodeURIComponent(message)}` : "#";
     if (contactBtn) contactBtn.href = hasPackage ? `contact.html?pachet=${encodeURIComponent(message)}` : "#";
   }
 
